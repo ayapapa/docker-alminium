@@ -13,7 +13,7 @@ see https://docs.docker.com/compose/
 $ git clone https://github.com/ayapapa/docker-alminium.git  
 $ cd docker-alminium  
 $ sudo docker-compose up -d  
-Note: unable to use reratrive url root and hostname, not yet.  
+Note: unable to use relatrive url root and hostname, not yet.  
 注意: まだホスト名指定とサブディレクトリ指定は利用できません。  
-You can access AMinium(Redmine+sevral pulugins) by http://localhost:10080.  
-ブラウザでhttp://localhost:10080をアクセスするとALMiniumが表されます。
+You can access AMinium(Redmine+sevral plugins) by http://localhost:10080.  
+ブラウザでhttp://localhost:10080をアクセスするとALMiniumが表示されます。
