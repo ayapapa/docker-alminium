@@ -1,6 +1,6 @@
 # What?
 This is ALMinium's docker version trial.  
-ALMiniumのDockeair版を作ってみるサイトです。うまくいったらご喝采。  
+ALMiniumのDocker版を作ってみるサイトです。うまくいったらご喝采。  
 
 ## Prepare (準備)
 ### install docker
