@@ -1,0 +1,13 @@
+ALMinium:
+  restart: always
+  image: ayapapa/docker-alminium:0.4
+  ports:
+    - "10080:80"
+  environment:
+    - ALM_HOST=localhost
+    - ALM_RELATIVE_URL_ROOT=
+  volumes:
+    - /home/alminium/home:/opt/alminium
+    - /home/alminium/db:/var/lib/mysql
+    - /home/alminium/data:/var/opt/alminium
+    - /home/alminium/conf:/etc/opt/alminium
