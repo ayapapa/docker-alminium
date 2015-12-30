@@ -1,10 +1,11 @@
-# test
-色々実験するためのリポジトリです。
+# What?
+This is ALMinium's docker version trial.
+ALMiniumのDeockeair版を作ってみるサイトです。うまくいったらご喝采。
 
-## Image
-<img src="https://github.com/ayapapa/alminium/blob/master/docs/img/alminium.png" width="300"/>
+## Prepare (準備)
+### install docker
 
-### 画像を縮小表示する方法は？
-↑の通り、width=xxxを指定するだけだった！！　OK!
+###
 
-## テストテスト
+## How to start ALMinium
+
