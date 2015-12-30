@@ -1,10 +1,19 @@
-# test
-色々実験するためのリポジトリです。
+# What?
+This is ALMinium's docker version trial.  
+ALMiniumのDockeair版を作ってみるサイトです。うまくいったらご喝采。  
 
-## Image
-<img src="https://github.com/ayapapa/alminium/blob/master/docs/img/alminium.png" width="300"/>
+## Prepare (準備)
+### install docker
+see https://docs.docker.com/engine/installation/
 
-### 画像を縮小表示する方法は？
-↑の通り、width=xxxを指定するだけだった！！　OK!
+### install docker-compose
+see https://docs.docker.com/compose/
 
-## テストテスト
+## How to start ALMinium
+$ git clone https://github.com/ayapapa/docker-alminium.git  
+$ cd docker-alminium  
+$ sudo docker-compose up -d  
+Note: unable to use reratrive url root and hostname, not yet.  
+注意: まだホスト名指定とサブディレクトリ指定は利用できません。  
+You can access AMinium(Redmine+sevral pulugins) by http://localhost:10080.  
+ブラウザでhttp://localhost:10080をアクセスするとALMiniumが表されます。
