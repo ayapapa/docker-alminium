@@ -4,7 +4,7 @@ ALMinium:
   ports:
     - "10080:80"
   environment:
-    - ALM_HOST=localhost
+    - ALM_HOSTNAME=localhost
     - ALM_RELATIVE_URL_ROOT=
   volumes:
     - /home/alminium/home:/opt/alminium

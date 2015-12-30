@@ -27,7 +27,9 @@ then
   cd / && tar xzf /home/etc-opt-alminium.tar.gz
 fi
 
-# HOTNAME
-echo $ALM_HOST > /etc/opt/alminium/hostname
+# HOSTNAME
+echo $ALM_HOSTNAME > /etc/opt/alminium/hostname
+
+# RELATIVE_DIR
 echo $ALM_RELATIVE_URL_ROOT > /etc/opt/alminium/relative_dir
 
