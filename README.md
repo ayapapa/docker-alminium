@@ -13,4 +13,5 @@ see https://docs.docker.com/compose/
 $ git clone https://github.com/ayapapa/docker-alminium.git  
 $ cd docker-alminium  
 $ docker-compose up -d  
-Note: unable to use reratrive url root and hostname, not yet .
+Note: unable to use reratrive url root and hostname, not yet.  
+注意: まだホスト名指定とサブディレクトリ指定は利用できません。
