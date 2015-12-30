@@ -1,6 +1,9 @@
 # docker image
 FROM ayapapa/docker-alminium:0.3
 
+# maintainer information
+MAINTAINER ayapapa ayapapajapan@yahoo.co.jp
+
 # install upervisor
 RUN apt-get update && apt-get install -y supervisor
 
@@ -19,6 +22,8 @@ RUN touch /etc/supervisord.conf \
 && echo '[program:apache2]'  >> /etc/supervisord.conf \
 && echo 'startretries=10' \
 && echo 'command=service apache2 start'  >> /etc/supervisord.conf
+
+COPY ./init.sh /home/init.sh
 
 CMD /usr/bin/supervisord -c /etc/supervisord.conf
 
