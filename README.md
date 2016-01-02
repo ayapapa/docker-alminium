@@ -1,6 +1,7 @@
 # What?
-This is ALMinium's docker version trial.  
+This is ALMinium(#)'s docker version trial.  
 ALMiniumのDocker版を作ってみるサイトです。うまくいったらご喝采。  
+(#)https://github.com/ayapapa/alminium, which is forked from https://github.com/alminium/alminium
 
 ## Prepare (準備)
 ### install docker
