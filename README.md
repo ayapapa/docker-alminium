@@ -24,11 +24,6 @@ curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ```
 
-## How to install Docker-ALMinium
-```shell
-git clone https://github.com/ayapapa/docker-alminium.git  
-```
-
 ## How to start Docker-ALMinium
 ```shell
 git clone https://github.com/ayapapa/docker-alminium.git  
