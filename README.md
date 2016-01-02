@@ -1,7 +1,10 @@
 # What?
-This is ALMinium(#)'s docker version trial.  
+This is ALMinium's docker version trial.  
 ALMiniumのDocker版を作ってみるサイトです。うまくいったらご喝采。  
-(#)https://github.com/ayapapa/alminium, which is forked from https://github.com/alminium/alminium  
+docker-composeを利用していますので、docker-compose.ymlのポート番号や環境変数を変更することでカスタマイズ出来ます。起動は、"docker-compose up -d"と叩くだけです。  
+refs:  
+ALMinium https://github.com/ayapapa/alminium, which is forked from https://github.com/alminium/alminium  
+Docker-ALMinium https://hub.docker.com/r/ayapapa/docker-alminium/  
 
 ## Prerequisites
 ### install docker
