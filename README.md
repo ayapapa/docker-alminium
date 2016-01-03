@@ -1,3 +1,4 @@
+# (UNDER CONSTRUCTION : 開発中)
 # What?
 This is ALMinium's docker version trial.  
 ALMiniumのDocker版を作ってみるサイトです。うまくいったらご喝采。  
