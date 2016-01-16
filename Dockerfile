@@ -1,29 +1,40 @@
 # docker image
-FROM ayapapa/docker-alminium:0.3
+FROM ubuntu:latest
 
 # maintainer information
 MAINTAINER ayapapa ayapapajapan@yahoo.co.jp
 
+# environment vars
+ENV ALM_HOME="/home/alm"  \
+    ALM_HOSTNAME="localhost" \
+    ALM_ENABLE_SSL="N" \
+    ALM_RELATIVE_URL_ROOT="" \
+    ALM_ENABLE_JENKINS="N"
+
+# for mysql auto installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# upgrade
+RUN apt-get update && apt-get dist-upgrade -y
+
+# install git
+RUN apt-get install -y git
+
+# clone alminium
+COPY ./install.sh ${ALM_HOME}/install.sh
+RUN ${ALM_HOME}/install.sh
+#RUN git clone -b docker-dev https://github.com/ayapapa/alminium.git ${ALM_HOME}/alminium
+#RUN cd ${ALM_HOME}/alminium && sudo -E ./smelt
+
 # install upervisor
-RUN apt-get update && apt-get install -y supervisor
+RUN apt-get install -y supervisor
 
-# supervisor設定
-RUN touch /etc/supervisord.conf \
-&& echo '[supervisord]'  >> /etc/supervisord.conf \
-&& echo 'nodaemon=true'  >> /etc/supervisord.conf \
-&& echo '[rpcinterface:supervisor]'  >> /etc/supervisord.conf \
-&& echo 'supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface'  >> /etc/supervisord.conf \
-&& echo '[supervisorctl]'  >> /etc/supervisord.conf \
-&& echo '[program:init]'  >> /etc/supervisord.conf \
-&& echo 'command=/home/init.sh'  >> /etc/supervisord.conf \
-&& echo '[program:mysql]'  >> /etc/supervisord.conf \
-&& echo 'startretries=10' \
-&& echo 'command=service mysql start'  >> /etc/supervisord.conf \
-&& echo '[program:apache2]'  >> /etc/supervisord.conf \
-&& echo 'startretries=10' \
-&& echo 'command=service apache2 start'  >> /etc/supervisord.conf
+# supervisor config
+COPY ./supervisord.conf /etc/supervisord.conf
 
-COPY ./init.sh /home/init.sh
+# intialize script
+COPY ./update.sh ${ALM_HOME}/update.sh
 
+# command
 CMD /usr/bin/supervisord -c /etc/supervisord.conf
 
