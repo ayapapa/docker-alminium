@@ -1,0 +1,110 @@
+#!/bin/bash
+#
+# update alminium
+#
+
+# ALMinium's DB data
+if [ ! -f /var/lib/mysql/initialized ]
+then
+  cd / && tar xzf $ALM_HOME/db.tar.gz
+elif [ "`cat /opt/alminium/initialized`" != "`cat /var/lib/mysql/initialized`" ]
+then
+  echo "update DB ..."
+  cd /opt/alminium
+  bundle exec rake db:migrate RAILS_ENV=production
+  bundle exec rake redmine:plugins:migrate RAILS_ENV=production
+  bundle exec rake tmp:cache:clear RAILS_ENV=production
+  bundle exec rake tmp:sessions:clear RAILS_ENV=production
+  cp -p /opt/alminium/initialized /var/lib/mysql/
+  echo "...done"
+fi
+
+# attachement files
+if [ ! -f /opt/alminium/files/initialized ]
+then
+  cd / && tar xzf $ALM_HOME/files.tar.gz
+fi
+
+# ALMinium's repo
+if [ ! -f /var/opt/alminium/initialized ]
+then
+  cd / && tar xzf $ALM_HOME/repo.tar.gz
+fi
+
+# log
+if [ ! -d /opt/alminium/log ]
+then
+  mkdir /opt/alminium/log
+fi
+if [ ! -d /var/log/apache2 ]
+then
+  mkdir /var/log/apache2
+fi
+chown root:adm /var/log/apache2
+chmod 640 /var/log/apache2
+chown www-data:www-data /opt/alminium/log
+chmod 640 /opt/alminium/log
+
+# check HOSTNAME
+ALM_OLD_HOSTNAME=`cat /etc/opt/alminium/hostname`
+if [ "$ALM_OLD_HOSTNAME" != "$ALM_HOSTNAME" ]
+then
+  echo "changed hostnam: [$ALM_OLD_HOSTNAME] -> [$ALM_HOSTNAME]"
+  cd /etc/opt/alminium
+  for FILE in $(ls redmine*.conf)
+  do
+    mv -f $FILE $FILE.old
+    sed "s|ServerName $ALM_OLD_HOSTNAME|ServerName $ALM_HOSTNAME|" \
+        $FILE.old > $FILE
+  done
+  echo $ALM_HOSTNAME > /etc/opt/alminium/hostname
+fi
+
+# check RELATIVE_PATH
+ALM_OLD_REL_PATH=`cat /etc/opt/alminium/relative_path`
+if [ `echo $ALM_SUBDIR | cut -c 1` = '/' ]
+then
+  ALM_NEW_REL_PATH=`echo $ALM_RELATIVE_URL_ROOT | cut -c 2-`
+else
+  ALM_NEW_REL_PATH=$ALM_RELATIVE_URL_ROOT
+fi
+if [ "$ALM_OLD_REL_PATH" != "$ALM_NEW_REL_PATH" ]
+then
+  echo "changed relative path: [$ALM_OLD_REL_PATH] -> [$ALM_NEW_REL_PATH]"
+  cd /etc/opt/alminium
+  if [ "$ALM_OLD_REL_PATH" = "" ]
+  then
+    # case that non-rerative to rerative, 
+    # ex.: http://localhost/projects/test 
+    #  ==> http://localhost/alminium/projects/test
+    REPLACE_FROM="DocumentRoot /opt/alminium/public"
+    REPLACE_TO="DocumentRoot /var/www/html\nRailsBaseURI /$ALM_NEW_REL_PATH"
+    ln -s /opt/alminium/public /var/www/html/$ALM_NEW_REL_PATH
+  elif [ "$ALM_NEW_REL_PATH" = "" ]
+  then
+    # case that rerative to non-rerative,
+    # ex.: http://localhost/alminium/projects/test
+    #  ==> http://localhost/projects/test
+    REPLACE_FROM="DocumentRoot /var/www/html\nRailsBaseURI /$ALM_OLD_REL_PATH"
+    REPLACE_TO="DocumentRoot /opt/alminium/public"
+    rm /var/www/html/$ALM_OLD_REL_PATH
+  else
+    # case that rerative to different rerative,
+    # ex.: http://localhost/alminium/projects/test
+    #  ==> http://localhost/redmine/projects/test
+    REPLACE_FROM="RailsBaseURI /$ALM_OLD_REL_PATH"
+    REPLACE_TO="RailsBaseURI /$ALM_NEW_REL_PATH"
+    mv /var/www/html/$ALM_OLD_REL_PATH /var/www/html/$ALM_NEW_REL_PATH
+  fi
+
+  for FILE in $(ls redmine*.conf)
+  do
+    mv -f $FILE $FILE.old
+    sed "s|$REPLACE_FROM|$REPLACE_TO|" $FILE.old > $FILE
+  done
+
+  echo $ALM_NEW_REL_PATH > /etc/opt/alminium/relative_path
+fi
+
+cd $ALM_HOME
+
