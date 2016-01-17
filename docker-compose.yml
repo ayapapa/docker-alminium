@@ -1,6 +1,6 @@
 ALMinium:
   restart: always
-  image: ayapapa/docker-alminium:0.6
+  image: ayapapa/docker-alminium:0.7
   ports:
     - "10080:80"
   environment:
@@ -10,5 +10,3 @@ ALMinium:
     - /home/alminium/files:/opt/alminium/files
     - /home/alminium/db:/var/lib/mysql
     - /home/alminium/repo:/var/opt/alminium
-#    - /home/alminium/log:/var/log/apache2
-#    - /home/alminium/log:/opt/alminium/log

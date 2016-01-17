@@ -3,16 +3,23 @@
 # install alminium and so on
 #
 
-# install siminium
+# install alminium
 git clone -b docker-dev https://github.com/ayapapa/alminium.git $ALM_HOME/alminium
 cd $ALM_HOME/alminium && sudo -E ./smelt
 
 # stop service for copying data
 service apache2 stop
 
-# log setting
-mv -f /opt/alminium/log /var/log/alminium
-ln -s /var/log/alminium /opt/alminium/log
+# save hostname
+echo $ALM_HOSTNAME > /etc/opt/alminium/hostname
+
+# save relative path
+if [ `echo $ALM_SUBDIR | cut -c 1` = '/' ]
+then
+  echo $ALM_RELATIVE_URL_ROOT | cut -c 2- > /etc/opt/alminium/relative_path
+else
+  echo $ALM_RELATIVE_URL_ROOT > /etc/opt/alminium/relative_path
+fi
 
 # data persistence
 date > /opt/alminium/initialized
