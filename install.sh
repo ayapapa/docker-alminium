@@ -3,6 +3,9 @@
 # install alminium and so on
 #
 
+# for mysql auto installation
+export DEBIAN_FRONTEND=noninteractive
+
 # install alminium
 git clone -b docker-dev https://github.com/ayapapa/alminium.git $ALM_HOME/alminium
 cd $ALM_HOME/alminium && sudo -E ./smelt
