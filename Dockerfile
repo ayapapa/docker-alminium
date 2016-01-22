@@ -1,5 +1,5 @@
 # docker image
-FROM ubuntu:latest
+FROM ubuntu:14.04
 
 # maintainer information
 MAINTAINER ayapapa ayapapajapan@yahoo.co.jp
@@ -38,5 +38,6 @@ COPY ./update.sh ${ALM_HOME}/update.sh
 
 # execute
 WORKDIR ${ALM_HOME}
-CMD /usr/bin/supervisord -c /etc/supervisord.conf
+
+ENTRYPOINT /usr/bin/supervisord -c /etc/supervisord.conf
 
