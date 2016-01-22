@@ -1,5 +1,5 @@
 # docker image
-FROM ubuntu:latest
+FROM ubuntu:14.04
 
 # maintainer information
 MAINTAINER ayapapa ayapapajapan@yahoo.co.jp
@@ -11,9 +11,6 @@ ENV ALM_HOME="/home/alm"  \
     ALM_RELATIVE_URL_ROOT="" \
     ALM_ENABLE_JENKINS="N"
 
-# for mysql auto installation
-ENV DEBIAN_FRONTEND=noninteractive
-
 # upgrade
 RUN apt-get update && apt-get dist-upgrade -y
 
@@ -23,11 +20,15 @@ RUN apt-get install -y git
 # clone alminium
 COPY ./install.sh ${ALM_HOME}/install.sh
 RUN ${ALM_HOME}/install.sh
-#RUN git clone -b docker-dev https://github.com/ayapapa/alminium.git ${ALM_HOME}/alminium
-#RUN cd ${ALM_HOME}/alminium && sudo -E ./smelt
 
 # install upervisor
 RUN apt-get install -y supervisor
+
+# Expose web & ssh
+EXPOSE 80
+
+# Define data volumes
+VOLUME ["/opt/alminium/files", "/var/opt/alminium", "/var/lib/mysql"]
 
 # supervisor config
 COPY ./supervisord.conf /etc/supervisord.conf
@@ -35,6 +36,8 @@ COPY ./supervisord.conf /etc/supervisord.conf
 # intialize script
 COPY ./update.sh ${ALM_HOME}/update.sh
 
-# command
-CMD /usr/bin/supervisord -c /etc/supervisord.conf
+# execute
+WORKDIR ${ALM_HOME}
+
+ENTRYPOINT /usr/bin/supervisord -c /etc/supervisord.conf
 
