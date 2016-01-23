@@ -1,6 +1,6 @@
 # What?
-This is ALMinium's docker version.  
-ALMiniumのDocker版を作ってみるサイトです。  
+This is ALMinium's docker version without Jenkins.  
+ALMiniumのDocker版を作ってみるサイトです。 今のところ、Jenkinsのインストールは無効としています。
 docker-composeを利用していますので、docker-compose.ymlのポート番号や環境変数を変更することでカスタマイズ出来ます。起動は、"docker-compose up -d"と叩くだけです。  
 refs:  
 * ALMinium: https://github.com/ayapapa/alminium, which is forked from https://github.com/alminium/alminium  
