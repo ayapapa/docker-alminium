@@ -1,4 +1,3 @@
-# (UNDER CONSTRUCTION : 開発中)
 # What?
 This is ALMinium's docker version.  
 ALMiniumのDocker版を作ってみるサイトです。  
