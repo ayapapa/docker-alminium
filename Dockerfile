@@ -39,5 +39,9 @@ COPY ./update.sh ${ALM_HOME}/update.sh
 # execute
 WORKDIR ${ALM_HOME}
 
+# deamon
 ENTRYPOINT /usr/bin/supervisord -c /etc/supervisord.conf
+
+# command
+CMD /bin/bash
 

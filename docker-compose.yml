@@ -1,11 +1,23 @@
 ALMinium:
   restart: always
   image: ayapapa/docker-alminium:0.8
+
   ports:
     - "10080:80"
+
   environment:
     - ALM_HOSTNAME=localhost
     - ALM_RELATIVE_URL_ROOT=
+
+    - SMTP_ENABLED=false
+    - SMTP_ENALBLE_STARTTLS_AUTO=true
+    - SMTP_ADDRESS=smtp.gmail.com
+    - SMTP_PORT=587
+    - SMTP_DOMAIN=smtp.gmail.com
+    - SMTP_AUTHENTICATION=:login
+    - SMTP_USER_NAME=example@gmail.com
+    - SMTP_PASS=xxxxxxxxxxxxxxxx
+
   volumes:
     - /home/alminium/files:/opt/alminium/files
     - /home/alminium/db:/var/lib/mysql
