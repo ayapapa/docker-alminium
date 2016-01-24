@@ -50,7 +50,7 @@ You can configuration bu modify Envitonment Variables in docker-compose.yml.
 | SMTP_ENALBLE_STARTTLS_AUTO | Enable STARTTLS. Defaults to true. |
 | SMTP_ADDRESS | SMTP server host address. Defaults to smtp.gmail.com |
 | SMTP_PORT | SMTP server port. Defaults to 587. |
-| SMTP_DOMAIN  | SMTP domain. Defaults to www.gmail.com |
+| SMTP_DOMAIN  | SMTP domain. Defaults to smtp.gmail.com |
 | SMTP_AUTHENTICATION | Specify the SMTP authentication method. Defaults to :login. |
 | SMTP_USER_NAME | SMTP username. |
 | SMTP_PASS |  SMTP password. |
