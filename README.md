@@ -43,15 +43,15 @@ see https://docs.docker.com/compose/
 You can configuration bu modify Envitonment Variables in docker-compose.yml.  
 
 | name | description |
-|:-----:|:-----------:|
+|:-----|:------------|
 | ALM_HOSTNAME | The hostname of the ALMinium server. Defaults to localhost. |
 | ALM_RELATIVE_URL_ROOT | The relative url of the ALMinium server. If set "alminium", you can access http://localhost:10080/alminium/. No default. |
 | SMTP_ENABLED | Enable smtp mail delivery. Defaults to false. |
 | SMTP_ENALBLE_STARTTLS_AUTO | Enable STARTTLS. Defaults to true. |
 | SMTP_ADDRESS | SMTP server host address. Defaults to smtp.gmail.com |
-| SMTP_PORT | SMTP server port. Defaults to 587. |
+| SMTP_PORT    | SMTP server port. Defaults to 587. |
 | SMTP_DOMAIN  | SMTP domain. Defaults to smtp.gmail.com |
 | SMTP_AUTHENTICATION | Specify the SMTP authentication method. Defaults to :login. |
 | SMTP_USER_NAME | SMTP username. |
-| SMTP_PASS |  SMTP password. |
+| SMTP_PASS      | SMTP password. |
 
