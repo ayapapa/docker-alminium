@@ -40,7 +40,7 @@ And you can change the port number(default is 10080) by editing docker-composer.
 see https://docs.docker.com/compose/
 
 ## Environment Variables  
-You can configuration bu modify Envitonment Variables in docker-compose.yml.  
+You can configure by modifying Envitonment Variables in docker-compose.yml.  
 
 | name | description |
 |:-----|:------------|
