@@ -49,7 +49,7 @@ chmod 640 /opt/alminium/log
 ALM_OLD_HOSTNAME=`cat /etc/opt/alminium/hostname`
 if [ "$ALM_OLD_HOSTNAME" != "$ALM_HOSTNAME" ]
 then
-  echo "changed hostnam: [$ALM_OLD_HOSTNAME] -> [$ALM_HOSTNAME]"
+  echo "changed hostname: [$ALM_OLD_HOSTNAME] -> [$ALM_HOSTNAME]"
   cd /etc/opt/alminium
   for FILE in $(ls redmine*.conf)
   do
@@ -71,36 +71,45 @@ fi
 if [ "$ALM_OLD_REL_PATH" != "$ALM_NEW_REL_PATH" ]
 then
   echo "changed relative path: [$ALM_OLD_REL_PATH] -> [$ALM_NEW_REL_PATH]"
-  cd /etc/opt/alminium
   if [ "$ALM_OLD_REL_PATH" = "" ]
   then
     # case that non-rerative to rerative, 
     # ex.: http://localhost/projects/test 
     #  ==> http://localhost/alminium/projects/test
+    OLD_PATH=
+    NEW_PATH="/$ALM_NEW_REL_PATH"
     REPLACE_FROM="DocumentRoot /opt/alminium/public"
-    REPLACE_TO="DocumentRoot /var/www/html\nRailsBaseURI /$ALM_NEW_REL_PATH"
+    REPLACE_TO="DocumentRoot /var/www/html\nRailsBaseURI $NEW_PATH"
     ln -s /opt/alminium/public /var/www/html/$ALM_NEW_REL_PATH
   elif [ "$ALM_NEW_REL_PATH" = "" ]
   then
     # case that rerative to non-rerative,
     # ex.: http://localhost/alminium/projects/test
     #  ==> http://localhost/projects/test
-    REPLACE_FROM="DocumentRoot /var/www/html\nRailsBaseURI /$ALM_OLD_REL_PATH"
+    OLD_PATH="/$ALM_OLD_REL_PATH"
+    NEW_PATH=
+    REPLACE_FROM="DocumentRoot /var/www/html\nRailsBaseURI $OLD_PATH"
     REPLACE_TO="DocumentRoot /opt/alminium/public"
     rm /var/www/html/$ALM_OLD_REL_PATH
   else
     # case that rerative to different rerative,
     # ex.: http://localhost/alminium/projects/test
     #  ==> http://localhost/redmine/projects/test
-    REPLACE_FROM="RailsBaseURI /$ALM_OLD_REL_PATH"
-    REPLACE_TO="RailsBaseURI /$ALM_NEW_REL_PATH"
+    OLD_PATH="/$ALM_OLD_REL_PATH"
+    NEW_PATH="/$ALM_NEW_REL_PATH"
+    REPLACE_FROM="RailsBaseURI $OLD_PATH"
+    REPLACE_TO="RailsBaseURI $NEW_PATH"
     mv /var/www/html/$ALM_OLD_REL_PATH /var/www/html/$ALM_NEW_REL_PATH
   fi
-
-  for FILE in $(ls redmine*.conf)
+  cd /etc/opt/alminium
+  for FILE in $(ls redmine*.conf vcs.conf)
   do
     mv -f $FILE $FILE.old
-    sed "s|$REPLACE_FROM|$REPLACE_TO|" $FILE.old > $FILE
+    sed "-e s|$REPLACE_FROM|$REPLACE_TO|" \
+        "-e s|Location $OLD_PATH/|Location $NEW_PATH/|" \
+        "-e s|ScriptAlias $OLD_PATH/git|ScriptAlias $NEW_PATH/git|" \
+        "-e s|WSGIScriptAlias $OLD_PATH/git|WSGIScriptAlias $NEW_PATH/git|" \
+        $FILE.old > $FILE
   done
 
   echo $ALM_NEW_REL_PATH > /etc/opt/alminium/relative_path
