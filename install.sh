@@ -7,7 +7,7 @@
 export DEBIAN_FRONTEND=noninteractive
 
 # install alminium
-git clone -b v3.2.0a https://github.com/ayapapa/alminium.git $ALM_HOME/alminium
+git clone -b "$ALM_VER" https://github.com/ayapapa/alminium.git $ALM_HOME/alminium
 cd $ALM_HOME/alminium && sudo -E ./smelt
 
 # stop service for copying data

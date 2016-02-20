@@ -1,0 +1,4 @@
+#!/bin/bash
+IP_ADDR="`ip -f inet -o addr show eth0|cut -d\  -f 7 | cut -d/ -f 1`"
+cp docker-compose.yml docker-compose.yml.old
+sed "s/www.example.com/$IP_ADDR/" docker-compose.yml.old > docker-compose.yml

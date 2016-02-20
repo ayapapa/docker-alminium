@@ -9,7 +9,8 @@ ENV ALM_HOME="/home/alm"  \
     ALM_HOSTNAME="localhost" \
     ALM_ENABLE_SSL="N" \
     ALM_RELATIVE_URL_ROOT="" \
-    ALM_ENABLE_JENKINS="N"
+    ALM_ENABLE_JENKINS="N" \
+    ALM_VER="v3.2.0b"
 
 # upgrade
 RUN apt-get update && apt-get dist-upgrade -y
@@ -24,8 +25,8 @@ RUN ${ALM_HOME}/install.sh
 # install upervisor
 RUN apt-get install -y supervisor
 
-# Expose web & ssh
-EXPOSE 80
+# Expose web
+EXPOSE 80 443
 
 # Define data volumes
 VOLUME ["/opt/alminium/files", "/var/opt/alminium", "/var/lib/mysql"]

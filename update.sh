@@ -139,3 +139,5 @@ fi
 # go to HOMEDIR
 cd $ALM_HOME
 
+service apache2 restart
+
