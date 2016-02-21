@@ -50,7 +50,7 @@ You can configure by modifying Envitonment Variables in docker-compose.yml.
 | ALM_BACKUP_MINUTE | Auto backup schedule, crontab minute section(0-59). Defaults to 0. |
 | ALM_BACKUP_HOUR   | Auto backup schedule, crontab hour section(0-23). Defaults to 3. |
 | ALM_BACKUP_DAY    | Auto backup schedule, crontab day section(0-31). Defaults to */2. |
-| ALM_BACKUP_EXPIRY | Auto backup schedule, how long (in days) to keep backups before they are deleted. Default to 14. |
+| ALM_BACKUP_EXPIRY | Auto backup schedule, how long (in days) to keep backups before they are deleted. Defaults to 14. |
 | SMTP_ENABLED | Enable smtp mail delivery, true or false. Defaults to false. |
 | SMTP_ENALBLE_STARTTLS_AUTO | Enable STARTTLS, true or false. Defaults to true. |
 | SMTP_ADDRESS | SMTP server host address. Defaults to smtp.gmail.com |
