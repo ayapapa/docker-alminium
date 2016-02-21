@@ -136,6 +136,13 @@ then  # remove old settings
   rm -f /opt/alminium/config/configuration.yml
 fi
 
+# config backup
+if [ "$ALM_ENABLE_AUTO_BACKUP" = "y" ]; then
+  /opt/alminium/config-backup
+else # no auto-backp
+  rm -f /etc/cron.d/alminium-backup-cron
+fi
+
 # go to HOMEDIR
 cd $ALM_HOME
 
