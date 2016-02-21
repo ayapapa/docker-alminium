@@ -46,8 +46,13 @@ You can configure by modifying Envitonment Variables in docker-compose.yml.
 |:-----|:------------|
 | ALM_HOSTNAME | The hostname of the ALMinium server. Defaults to localhost. |
 | ALM_RELATIVE_URL_ROOT | The relative url of the ALMinium server. If set "alminium", you can access http://localhost:10080/alminium/. No default. |
-| SMTP_ENABLED | Enable smtp mail delivery. Defaults to false. |
-| SMTP_ENALBLE_STARTTLS_AUTO | Enable STARTTLS. Defaults to true. |
+| ALM_ENABLE_AUTO_BACKUP | Enable auto backup, y(es) or N(o). Defaults to y. | 
+| ALM_BACKUP_MINUTE | Auto backup schedule, crontab minute section(0-59). Defaults to 0. |
+| ALM_BACKUP_HOUR   | Auto backup schedule, crontab hour section(0-23). Defaults to 3. |
+| ALM_BACKUP_DAY    | Auto backup schedule, crontab day section(0-31). Defaults to */2. |
+| ALM_BACKUP_EXPIRY | Auto backup schedule, how long (in days) to keep backups before they are deleted. Default to 14. |
+| SMTP_ENABLED | Enable smtp mail delivery, true or false. Defaults to false. |
+| SMTP_ENALBLE_STARTTLS_AUTO | Enable STARTTLS, true or false. Defaults to true. |
 | SMTP_ADDRESS | SMTP server host address. Defaults to smtp.gmail.com |
 | SMTP_PORT    | SMTP server port. Defaults to 587. |
 | SMTP_DOMAIN  | SMTP domain. Defaults to smtp.gmail.com |
