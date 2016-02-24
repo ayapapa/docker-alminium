@@ -6,8 +6,8 @@ refs:
 * ALMinium: https://github.com/ayapapa/alminium, which is forked from https://github.com/alminium/alminium  
 * Docker image: https://hub.docker.com/r/ayapapa/docker-alminium/  
 
-## Prerequisites
-### install docker
+# Prerequisites
+## install docker
 see https://docs.docker.com/engine/installation/   
 In case of installation on Ubuntu 14.04(LTS):  
 ```shell
@@ -18,7 +18,7 @@ sudo apt-get update
 sudo apt-get install lxc-docker
 ```
 
-### install docker-compose
+## install docker-compose
 see https://docs.docker.com/compose/  
 for example:
 ```shell
@@ -28,7 +28,7 @@ curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ```
 
-## How to start  
+# How to start  
 ```shell
 git clone https://github.com/ayapapa/docker-alminium.git  
 cd docker-alminium  
@@ -39,7 +39,7 @@ You can use AMinium(Redmine + several plugins) trough web-browser with URL http:
 And you can change the port number(default is 10080) by editing docker-composer.yml and restarting.  
 see https://docs.docker.com/compose/
 
-## Environment Variables  
+# Environment Variables  
 You can configure by modifying Envitonment Variables in docker-compose.yml.  
 
 | name | description |
