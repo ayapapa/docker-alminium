@@ -45,6 +45,7 @@ You can configure by modifying Envitonment Variables in docker-compose.yml.
 | name | description |
 |:-----|:------------|
 | ALM_HOSTNAME | The hostname of the ALMinium server. Defaults to localhost. |
+| ALM_ENABLE_SSL | Enable SSL, y(es) or N(o). Defaults to N. |
 | ALM_RELATIVE_URL_ROOT | The relative url of the ALMinium server. If set "alminium", you can access http://localhost:10080/alminium/. No default. |
 | ALM_ENABLE_AUTO_BACKUP | Enable auto backup, y(es) or N(o). Defaults to y. | 
 | ALM_BACKUP_MINUTE | Auto backup schedule, crontab minute section(0-59). Defaults to 0. |
