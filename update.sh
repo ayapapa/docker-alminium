@@ -143,6 +143,30 @@ else # no auto-backp
   rm -f /etc/cron.d/alminium-backup-cron
 fi
 
+# config ssl
+if [ "`grep "#SSL#" /etc/opt/alminium/alminium.conf`" = "" ]; then
+  ALM_ENABLE_SSL_OLD=y
+else
+  ALM_ENABLE_SSL_OLD=N
+fi
+if [ "$ALM_ENABLE_SSL_OLD" != "$ALM_ENABLE_SSL" ]; then
+  cp -p /etc/opt/alminium/alminium.conf /etc/opt/alminium/alminium.conf.old
+  cp -p /etc/opt/alminium/redmine.conf /etc/opt/alminium/redmine.conf.old
+  if [ "$ALM_ENABLE_SSL_OLD" = "N" -a "$ALM_ENABLE_SSL" = "y" ]; then
+    sed "s|#SSL# *||" /etc/opt/alminium/alminium.conf.old \
+        > /etc/opt/alminium/alminium.conf
+    sed "s|#SSL# *||" /etc/opt/alminium/redmine.conf.old \
+        > /etc/opt/alminium/redmine.conf
+    a2enmod ssl
+  elif [ "$ALM_ENABLE_SSL_OLD" = "y" -a "$ALM_ENABLE_SSL" = "N" ]; then
+    sed "s|Include /etc/opt/alminium/redmine-ssl.conf|#SSL# Include /etc/opt/alminium/redmine-ssl.conf|" /etc/opt/alminium/alminium.conf.old \ 
+        > /etc/opt/alminium/alminium.conf
+    sed "s|Rewrite|#SSL# Rewrite|" /etc/opt/alminium/redmine.conf.old \
+        > /etc/opt/alminium/redmine.conf
+    a2dismod ssl
+  fi
+fi
+
 # go to HOMEDIR
 cd $ALM_HOME
 

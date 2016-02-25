@@ -1,5 +1,4 @@
 # docker image
-#FROM ubuntu:14.04
 FROM ayapapa/ubuntu1404:20160221
 
 # maintainer information
@@ -18,6 +17,7 @@ ENV ALM_HOME="/home/alm"  \
     ALM_BACKUP_EXPIRY="14" \
     ALM_BACKUP_DIR="/var/opt/alminium-backup" \
     ALM_BACKUP_LOG="/opt/alminium/log/backup.log" \
+    ALM_ENABLE_SSL="N" \
     ALM_VER="v3.2.0c"
   # auto backup in every 2 days at 3 A.M.
 

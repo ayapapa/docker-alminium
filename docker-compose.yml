@@ -1,9 +1,10 @@
 ALMinium:
   restart: always
-  image: ayapapa/docker-alminium:3.2.0c
+  image: ayapapa/docker-alminium:3.2.0c-1
 
   ports:
     - "10080:80"
+    - "10443:443"
 
   environment:
     - ALM_HOSTNAME=www.example.com
@@ -13,6 +14,7 @@ ALMinium:
     - ALM_BACKUP_HOUR=3
     - ALM_BACKUP_DAY=*/2
     - ALM_BACKUP_EXPIRY=14
+    - ALM_ENABLE_SSL=N
 
     - SMTP_ENABLED=false
     - SMTP_ENALBLE_STARTTLS_AUTO=true
