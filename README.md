@@ -36,7 +36,7 @@ sudo docker-compose up -d
 ```
 You can use AMinium(Redmine + several plugins) trough web-browser with URL http://localhost:10080.  
 ブラウザで http://localhost:10080 をアクセスするとALMiniumが表示されます。  
-And you can change the port number(default is 10080) by editing docker-composer.yml and restarting.  
+And you can change the hostname and the port number(defaults to 10080) by editing docker-composer.yml and restarting.  
 see https://docs.docker.com/compose/
 
 # Environment Variables  
@@ -44,7 +44,7 @@ You can configure by modifying Envitonment Variables in docker-compose.yml.
 
 | name | description |
 |:-----|:------------|
-| ALM_HOSTNAME | The hostname of the ALMinium server. Defaults to localhost. |
+| ALM_HOSTNAME | The hostname of the ALMinium server. It should be set to server name or IP address, to be accessable from clients. Defaults to localhost. |
 | ALM_ENABLE_SSL | Enable SSL, y(es) or N(o). Defaults to N. |
 | ALM_RELATIVE_URL_ROOT | The relative url of the ALMinium server. If set "alminium", you can access http://localhost:10080/alminium/. No default. |
 | ALM_ENABLE_AUTO_BACKUP | Enable auto backup, y(es) or N(o). Defaults to y. | 
