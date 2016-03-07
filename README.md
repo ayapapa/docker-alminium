@@ -11,11 +11,8 @@ refs:
 see https://docs.docker.com/engine/installation/   
 In case of installation on Ubuntu 14.04(LTS):  
 ```shell
-sudo apt-get update
-sudo apt-get install docker.io
-sudo sh -c "echo deb https://get.docker.com/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
-sudo apt-get update
-sudo apt-get install lxc-docker
+sudo apt-get update && sudo apt-get dist-upgrade
+curl -fsSL https://get.docker.com/ | sh
 ```
 
 ## install docker-compose
