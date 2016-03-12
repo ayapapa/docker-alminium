@@ -1,0 +1,9 @@
+.git
+.gitignore
+*.swp
+*.tmp
+*.org
+LICENSE
+README.md
+docker-compose.yml
+
