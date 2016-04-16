@@ -1,7 +1,7 @@
 # What?
 This is ALMinium's docker version without Jenkins.  
 ALMiniumのDocker版を作ってみるサイトです。 今のところ、Jenkinsのインストールは無効としています。  
-docker-composeを利用していますので、docker-compose.ymlのポート番号や環境変数を変更することでカスタマイズ出来ます。起動は、"docker-compose up -d"と叩くだけです。  
+docker-composeを利用していますので、docker-compose.ymlのホスト名、ポート番号や環境変数を変更することでカスタマイズ出来ます。起動は、"docker-compose up -d"と叩くだけです。  
 refs:  
 * ALMinium: https://github.com/ayapapa/alminium, which is forked from https://github.com/alminium/alminium  
 * Docker image: https://hub.docker.com/r/ayapapa/docker-alminium/  
@@ -34,6 +34,8 @@ sudo docker-compose up -d
 You can use AMinium(Redmine + several plugins) trough web-browser with URL http://localhost:10080.  
 ブラウザで http://localhost:10080 をアクセスするとALMiniumが表示されます。  
 And you can change the hostname and the port number(defaults to 10080) by editing docker-composer.yml and restarting.  
+ホスト名、ポート番号など適切な設定に変更してお使いください。
+
 see https://docs.docker.com/compose/
 
 # Environment Variables  
@@ -41,7 +43,7 @@ You can configure by modifying Envitonment Variables in docker-compose.yml.
 
 | name | description |
 |:-----|:------------|
-| ALM_HOSTNAME | The hostname of the ALMinium server. It should be set to server name or IP address, to be accessable from clients. Defaults to localhost. |
+| ALM_HOSTNAME | The hostname of the ALMinium server. It should be set to server name or IP address, to be accessable from clients. Defaults to www.example.com. |
 | ALM_ENABLE_SSL | Enable SSL, y(es) or N(o). Defaults to N. |
 | ALM_RELATIVE_URL_ROOT | The relative url of the ALMinium server. If set "alminium", you can access http://localhost:10080/alminium/. No default. |
 | ALM_ENABLE_AUTO_BACKUP | Enable auto backup, y(es) or N(o). Defaults to y. | 
