@@ -7,6 +7,7 @@
 if [ ! -f /var/lib/mysql/initialized ]
 then
   cd / && tar xzf $ALM_HOME/db.tar.gz
+  chown -R mysql:mysql /var/lib/mysql
 elif [ "`cat /opt/alminium/initialized`" != "`cat /var/lib/mysql/initialized`" ]
 then
   echo "update DB ..."

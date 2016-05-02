@@ -1,5 +1,5 @@
 # docker image
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 # maintainer information
 MAINTAINER ayapapa ayapapajapan@yahoo.co.jp
@@ -18,7 +18,7 @@ ENV ALM_HOME="/home/alm"  \
     ALM_BACKUP_DIR="/var/opt/alminium-backup" \
     ALM_BACKUP_LOG="/opt/alminium/log/backup.log" \
     ALM_ENABLE_SSL="N" \
-    ALM_VER="v3.2.1"
+    ALM_VER="v3.2.1b"
   # auto backup in every 2 days at 3 A.M.
 
 # upgrade

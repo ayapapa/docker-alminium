@@ -8,7 +8,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 # install alminium
 git clone -b "$ALM_VER" https://github.com/ayapapa/alminium.git $ALM_HOME/alminium
-cd $ALM_HOME/alminium && sudo -E ./smelt
+cd $ALM_HOME/alminium && ./smelt
 
 # stop service for copying data
 service apache2 stop
@@ -17,7 +17,7 @@ service apache2 stop
 echo $ALM_HOSTNAME > /etc/opt/alminium/hostname
 
 # save relative path
-if [ `echo $ALM_SUBDIR | cut -c 1` = '/' ]
+if [ "`echo $ALM_SUBDIR | cut -c 1`" = "/" ]
 then
   echo $ALM_RELATIVE_URL_ROOT | cut -c 2- > /etc/opt/alminium/relative_path
 else
@@ -35,6 +35,6 @@ tar czf $ALM_HOME/repo.tar.gz /var/opt/alminium
 
 # delete dev resouces
 apt-get -y purge libmagickcore-dev libmagickwand-dev libmysqlclient-dev libsqlite3-dev libssl-dev ruby2.1-dev wget make g++
-sudo apt-get -y autoremove
-sudo apt-get -y autoclean
+apt-get -y autoremove
+apt-get -y autoclean
 
