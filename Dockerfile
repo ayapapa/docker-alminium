@@ -17,7 +17,6 @@ ENV ALM_HOME="/home/alm"  \
     ALM_BACKUP_EXPIRY="14" \
     ALM_BACKUP_DIR="/var/opt/alminium-backup" \
     ALM_BACKUP_LOG="/opt/alminium/log/backup.log" \
-    ALM_ENABLE_SSL="N" \
     ALM_VER="v3.2.1b"
   # auto backup in every 2 days at 3 A.M.
 
@@ -46,7 +45,7 @@ COPY ./supervisord.conf /etc/supervisord.conf
 # intialize script
 COPY ./update.sh ${ALM_HOME}/update.sh
 
-# execute
+# working directory
 WORKDIR ${ALM_HOME}
 
 # deamon
