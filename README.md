@@ -4,6 +4,7 @@ ALMiniumのDocker版を作ってみるサイトです。 今のところ、Jenki
 docker-composeを利用していますので、docker-compose.ymlのホスト名、ポート番号や環境変数を変更することでカスタマイズ出来ます。起動は、"docker-compose up -d"と叩くだけです。  
 refs:  
 * ALMinium: https://github.com/ayapapa/alminium, which is forked from https://github.com/alminium/alminium  
+* Dockerized ALMinium: https://github.com/ayapapa/docker-alminium  
 * Docker image: https://hub.docker.com/r/ayapapa/docker-alminium/  
 
 # Prerequisites
@@ -16,16 +17,17 @@ curl -fsSL https://get.docker.com/ | sh
 ```
 
 ## install docker-compose
-see https://docs.docker.com/compose/  
+see https://docs.docker.com/compose/  or https://github.com/docker/compose/releases  
 for example:
 ```shell
 sudo su
 [sudo] password for user-name: (your password)
-curl -L https://github.com/docker/compose/releases/download/1.6.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+curl -L https://github.com/docker/compose/releases/download/1.7.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ```
 
 # How to start  
+## Start with docker-compose
 ```shell
 git clone https://github.com/ayapapa/docker-alminium.git  
 cd docker-alminium  
@@ -38,6 +40,12 @@ And you can change the hostname and the port number(defaults to 10080) by editin
 
 see https://docs.docker.com/compose/
 
+## Start with Docker command
+```shell
+$ sudo docker pull ayapapa/docker-alminium:(newest revision)
+$ sudo docker run --name=docker-alminium -v /home/alminium/files:/opt/alminium/files -v /home/alminium/db:/var/lib/mysql -v /home/alminium/data:/var/opt/alminium -v /home/alminium/conf:/etc/opt/alminium -p 80:80 ayapapa/docker-alminium:(newest revision)
+```
+
 # Environment Variables  
 You can configure by modifying Envitonment Variables in docker-compose.yml.  
 
@@ -45,7 +53,7 @@ You can configure by modifying Envitonment Variables in docker-compose.yml.
 |:-----|:------------|
 | ALM_HOSTNAME | The hostname of the ALMinium server. It should be set to server name or IP address, to be accessable from clients. Defaults to www.example.com. |
 | ALM_ENABLE_SSL | Enable SSL, y(es) or N(o). Defaults to N. |
-| ALM_RELATIVE_URL_ROOT | The relative url of the ALMinium server. If set "alminium", you can access http://localhost:10080/alminium/. No default. |
+| ALM_RELATIVE_URL_ROOT | The relative url of the ALMinium server. If set "alminium", you can access http://localhost:10080/alminium/. Defaults to null, means no sub-directory. |
 | ALM_ENABLE_AUTO_BACKUP | Enable auto backup, y(es) or N(o). Defaults to y. | 
 | ALM_BACKUP_MINUTE | Auto backup schedule, crontab minute section(0-59). Defaults to 0. |
 | ALM_BACKUP_HOUR   | Auto backup schedule, crontab hour section(0-23). Defaults to 3. |
