@@ -1,7 +1,8 @@
 # What?
-This is ALMinium's docker version without Jenkins.  
-ALMiniumのDocker版を作ってみるサイトです。 今のところ、Jenkinsのインストールは無効としています。  
+This is ALMinium's docker version without Jenkins. Once you install docker and docker-compose, you can use ALMinium easily with command "docker-compose up -d", and custormize easily by modifying docker-compose.yml.  
+ALMiniumのDocker版を作ってみるサイトです。 Jenkinsのインストールは無効としています。  
 docker-composeを利用していますので、docker-compose.ymlのホスト名、ポート番号や環境変数を変更することでカスタマイズ出来ます。起動は、"docker-compose up -d"と叩くだけです。  
+
 refs:  
 * ALMinium: https://github.com/ayapapa/alminium, which is forked from https://github.com/alminium/alminium  
 * Dockerized ALMinium: https://github.com/ayapapa/docker-alminium  
@@ -52,7 +53,7 @@ You can configure by modifying Envitonment Variables in docker-compose.yml.
 | name | description |
 |:-----|:------------|
 | ALM_HOSTNAME | The hostname of the ALMinium server. It should be set to server name or IP address, to be accessable from clients. Defaults to www.example.com. |
-| ALM_ENABLE_SSL | Enable SSL, y(es) or N(o). Defaults to N. |
+| ALM_ENABLE_SSL | Enable SSL, y(es) or N(o). Defaults to N. Enabling this, self-signed certification will be created and used automatically(*). |
 | ALM_RELATIVE_URL_ROOT | The relative url of the ALMinium server. If set "alminium", you can access http://localhost:10080/alminium/. Defaults to null, means no sub-directory. |
 | ALM_ENABLE_AUTO_BACKUP | Enable auto backup, y(es) or N(o). Defaults to y. | 
 | ALM_BACKUP_MINUTE | Auto backup schedule, crontab minute section(0-59). Defaults to 0. |
@@ -67,4 +68,6 @@ You can configure by modifying Envitonment Variables in docker-compose.yml.
 | SMTP_AUTHENTICATION | Specify the SMTP authentication method. Defaults to :login. |
 | SMTP_USER_NAME | SMTP username. |
 | SMTP_PASS      | SMTP password. |
+
+*If you like to change the certification file, you should dive into ALMinium container with command "docker exec -it (container's name) /bin/bash", and then put your certification file on the place you like, and change /etc/opt/alminium/redmine-ssl.conf's certification description.
 
