@@ -17,7 +17,8 @@ ENV ALM_HOME="/home/alm"  \
     ALM_BACKUP_EXPIRY="14" \
     ALM_BACKUP_DIR="/var/opt/alminium-backup" \
     ALM_BACKUP_LOG="/opt/alminium/log/backup.log" \
-    ALM_VER="v3.2.1b"
+    ALM_VER="master" \
+    RM_VER=3.2.2
   # auto backup in every 2 days at 3 A.M.
 
 # upgrade

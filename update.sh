@@ -63,7 +63,7 @@ fi
 
 # RELATIVE_PATH
 ALM_OLD_REL_PATH=`cat /etc/opt/alminium/relative_path`
-if [ "`echo $ALM_SUBDIR | cut -c 1`" = "/" ]
+if [ "`echo $ALM_RELATIVE_URL_ROOT | cut -c 1`" = "/" ]
 then
   ALM_NEW_REL_PATH=`echo $ALM_RELATIVE_URL_ROOT | cut -c 2-`
 else

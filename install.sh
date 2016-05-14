@@ -17,7 +17,7 @@ service apache2 stop
 echo $ALM_HOSTNAME > /etc/opt/alminium/hostname
 
 # save relative path
-if [ "`echo $ALM_SUBDIR | cut -c 1`" = "/" ]
+if [ "`echo $ALM_RELATIVE_URL_ROOT | cut -c 1`" = "/" ]
 then
   echo $ALM_RELATIVE_URL_ROOT | cut -c 2- > /etc/opt/alminium/relative_path
 else
@@ -34,7 +34,7 @@ tar czf $ALM_HOME/files.tar.gz /opt/alminium/files
 tar czf $ALM_HOME/repo.tar.gz /var/opt/alminium
 
 # delete dev resouces
-apt-get -y purge libmagickcore-dev libmagickwand-dev libmysqlclient-dev libsqlite3-dev libssl-dev ruby2.1-dev wget make g++
+apt-get -y purge libmagickcore-dev libmagickwand-dev libsqlite3-dev libssl-dev make g++
 apt-get -y autoremove
 apt-get -y autoclean
 
