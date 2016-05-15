@@ -3,7 +3,9 @@
 # update alminium
 #
 
+#
 # ALMinium's DB data
+#
 if [ ! -f /var/lib/mysql/initialized ]
 then
   cd / && tar xzf $ALM_HOME/db.tar.gz
@@ -20,19 +22,25 @@ then
   echo "...done"
 fi
 
+#
 # attachement files
+#
 if [ ! -f /opt/alminium/files/initialized ]
 then
   cd / && tar xzf $ALM_HOME/files.tar.gz
 fi
 
+#
 # ALMinium's repo
+#
 if [ ! -f /var/opt/alminium/initialized ]
 then
   cd / && tar xzf $ALM_HOME/repo.tar.gz
 fi
 
+#
 # log
+#
 if [ ! -d /opt/alminium/log ]
 then
   mkdir /opt/alminium/log
@@ -61,7 +69,9 @@ then
   echo $ALM_HOSTNAME > /etc/opt/alminium/hostname
 fi
 
+#
 # RELATIVE_PATH
+#
 ALM_OLD_REL_PATH=`cat /etc/opt/alminium/relative_path`
 if [ "`echo $ALM_RELATIVE_URL_ROOT | cut -c 1`" = "/" ]
 then
@@ -69,6 +79,7 @@ then
 else
   ALM_NEW_REL_PATH=$ALM_RELATIVE_URL_ROOT
 fi
+# set old path and new path
 if [ "$ALM_OLD_REL_PATH" != "$ALM_NEW_REL_PATH" ]
 then
   echo "changed relative path: [$ALM_OLD_REL_PATH] -> [$ALM_NEW_REL_PATH]"
@@ -102,6 +113,8 @@ then
     REPLACE_TO="RailsBaseURI $NEW_PATH"
     mv /var/www/html/$ALM_OLD_REL_PATH /var/www/html/$ALM_NEW_REL_PATH
   fi
+
+  # modify apache configuration
   cd /etc/opt/alminium
   for FILE in $(ls redmine*.conf vcs.conf)
   do
@@ -112,11 +125,15 @@ then
         "-e s|WSGIScriptAlias $OLD_PATH/git|WSGIScriptAlias $NEW_PATH/git|" \
         $FILE.old > $FILE
   done
-
+  # modify hook command
+  sed -i "s|localhost$OLD_PATH|localhost$NEW_PATH|g" /opt/alminium/bin/alm-sync-scm
+  # modify current relative path
   echo $ALM_NEW_REL_PATH > /etc/opt/alminium/relative_path
 fi
 
+#
 # email
+#
 if [ "$SMTP_ENABLED" = "true" ]
 then
   cd /opt/alminium/config/
@@ -137,14 +154,18 @@ then  # remove old settings
   rm -f /opt/alminium/config/configuration.yml
 fi
 
+#
 # config backup
+#
 if [ "$ALM_ENABLE_AUTO_BACKUP" = "y" ]; then
   /opt/alminium/config-backup
 else # no auto-backp
   rm -f /etc/cron.d/alminium-backup-cron
 fi
 
+#
 # config ssl
+#
 if [ "`grep "#SSL#" /etc/opt/alminium/alminium.conf`" = "" ]; then
   ALM_ENABLE_SSL_OLD=y
 else
