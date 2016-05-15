@@ -119,10 +119,10 @@ then
   for FILE in $(ls redmine*.conf vcs.conf)
   do
     mv -f $FILE $FILE.old
-    sed "-e s|$REPLACE_FROM|$REPLACE_TO|" \
-        "-e s|Location $OLD_PATH/|Location $NEW_PATH/|" \
-        "-e s|ScriptAlias $OLD_PATH/git|ScriptAlias $NEW_PATH/git|" \
-        "-e s|WSGIScriptAlias $OLD_PATH/git|WSGIScriptAlias $NEW_PATH/git|" \
+    sed -e "s|$REPLACE_FROM|$REPLACE_TO|" \
+        -e "s|Location $OLD_PATH/|Location $NEW_PATH/|" \
+        -e "s|ScriptAlias $OLD_PATH/git|ScriptAlias $NEW_PATH/git|" \
+        -e "s|WSGIScriptAlias $OLD_PATH/git|WSGIScriptAlias $NEW_PATH/git|" \
         $FILE.old > $FILE
   done
   # modify hook command
