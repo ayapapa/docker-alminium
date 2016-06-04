@@ -6,6 +6,8 @@ if [ -f /etc/redhat-release ]; then
   if [ "$CHK" != "" ]; then
     ETH0=enp0s3
   fi
+elif [ -f /etc/lsb-release -a "`grep 16.04 /etc/lsb-release`" != "" ]; then
+  ETH0=enp0s3
 fi
 
 IP_ADDR="`ip -f inet -o addr show $ETH0 | cut -d\  -f 7 | cut -d/ -f 1`"
