@@ -1,3 +1,5 @@
+
+[![Licence](https://img.shields.io/npm/l/express.svg)](https://github.com/ayapapa/docker-alminium/edit/master/LICENSE)
 # What?
 This is ALMinium's docker version without Jenkins. Once you install docker and docker-compose, you can use ALMinium easily with command "docker-compose up -d", and custormize easily by modifying docker-compose.yml.  
 ALMiniumのDocker版を作ってみるサイトです。 Jenkinsのインストールは無効としています。  
@@ -13,7 +15,7 @@ refs:
 see https://docs.docker.com/engine/installation/   
 In case of installation on Ubuntu 14.04(LTS):  
 ```shell
-sudo apt-get update && sudo apt-get dist-upgrade
+sudo apt-get update && sudo apt-get -y dist-upgrade
 curl -fsSL https://get.docker.com/ | sh
 ```
 
