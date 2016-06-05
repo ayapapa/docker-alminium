@@ -1,6 +1,6 @@
 ALMinium:
   restart: always
-  image: ayapapa/docker-alminium:3.2.2
+  image: ayapapa/docker-alminium:latest
 
   ports:
     - "10080:80"
