@@ -12,12 +12,12 @@ refs:
 
 # Prerequisites
 ## install docker
-see https://docs.docker.com/engine/installation/   
-In case of installation on Ubuntu 14.04(LTS):  
 ```shell
 sudo apt-get update && sudo apt-get -y dist-upgrade
 curl -fsSL https://get.docker.com/ | sh
 ```
+see https://docs.docker.com/engine/installation/   
+see https://get.docker.com/
 
 ## install docker-compose
 see https://docs.docker.com/compose/  or https://github.com/docker/compose/releases  
