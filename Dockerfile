@@ -17,7 +17,7 @@ ENV ALM_HOME="/home/alm"  \
     ALM_BACKUP_EXPIRY="14" \
     ALM_BACKUP_DIR="/var/opt/alminium-backup" \
     ALM_BACKUP_LOG="/opt/alminium/log/backup.log" \
-    ALM_VER="3.3.0a" \
+    ALM_VER="v3.3.0a" \
     RM_VER=3.3.0
   # auto backup in every 2 days at 3 A.M.
 
@@ -25,7 +25,13 @@ ENV ALM_HOME="/home/alm"  \
 RUN apt-get update && apt-get dist-upgrade -y
 
 # install git
-RUN apt-get install -y git
+RUN apt-get install -y apt-utils apache2 bc g++ git \
+    imagemagick libapache2-mod-passenger libapache2-mod-perl2 \
+    libapache2-mod-wsgi libapache2-svn libdbd-mysql-perl \
+    libdbi-perl libmagickcore-dev libmagickwand-dev \
+    libmysqlclient-dev libsqlite3-dev libssl-dev make \
+    mercurial mysql-server php-mysql ruby ruby-dev subversion \
+    unzip wget
 
 # clone alminium
 COPY ./install.sh ${ALM_HOME}/install.sh
