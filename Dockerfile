@@ -27,7 +27,7 @@ ENV ALM_HOME="/home/alm"  \
 RUN apt-get update && apt-get dist-upgrade -y
 
 # install git
-RUN apt-get install -y apache2 apt-utils bc g++ git \
+RUN apt-get install -y apache2 bc g++ git \
     imagemagick libapache2-mod-passenger libapache2-mod-perl2 \
     libapache2-mod-wsgi libapache2-svn libdbd-mysql-perl \
     libdbi-perl libmagickcore-dev libmagickwand-dev \
