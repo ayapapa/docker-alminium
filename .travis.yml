@@ -1,0 +1,4 @@
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get dist-upgrade -y
+  - sudo apt-get install git
