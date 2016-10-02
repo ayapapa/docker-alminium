@@ -1,7 +1,6 @@
 
 [![Licence](https://img.shields.io/npm/l/express.svg)](https://github.com/ayapapa/docker-alminium/edit/master/LICENSE)
 [![](https://images.microbadger.com/badges/image/ayapapa/docker-alminium.svg)](https://microbadger.com/images/ayapapa/docker-alminium "Get your own image badge on microbadger.com")
-[![Build Status](https://secure.travis-ci.org/ayapapa/docker-alminium.png?branch=master)](http://travis-ci.org/ayapapa/docker-alminium)
 
 # What?
 This is ALMinium's docker version without Jenkins. Once you install docker and docker-compose, you can use ALMinium easily with command "docker-compose up -d", and custormize easily by modifying docker-compose.yml.  
