@@ -17,8 +17,8 @@ ENV ALM_HOME="/home/alm"  \
     ALM_BACKUP_EXPIRY="14" \
     ALM_BACKUP_DIR="/var/opt/alminium-backup" \
     ALM_BACKUP_LOG="/opt/alminium/log/backup.log" \
-    ALM_VER="v3.3.0a" \
-    RM_VER=3.3.0 \
+    ALM_VER="v3.3.1" \
+    RM_VER=3.3.1 \
     DEBIAN_FRONTEND=noninteractive
     
   # auto backup in every 2 days at 3 A.M.
