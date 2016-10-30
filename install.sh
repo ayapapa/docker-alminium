@@ -33,8 +33,11 @@ tar czf $ALM_HOME/db.tar.gz /var/lib/mysql
 tar czf $ALM_HOME/files.tar.gz /opt/alminium/files
 tar czf $ALM_HOME/repo.tar.gz /var/opt/alminium
 
-# delete dev resouces
-apt-get -y purge libmagickcore-dev libmagickwand-dev libsqlite3-dev libssl-dev make g++
+# delete resouces
+apt-get -y purge bc libmagickcore-dev libmagickwand-dev libmysqlclient-dev \
+           libsqlite3-dev libssl-dev make g++
 apt-get -y autoremove
 apt-get -y autoclean
+
+rm -r $ALM_HOME/alminium
 
