@@ -17,7 +17,7 @@ ENV ALM_HOME="/home/alm"  \
     ALM_BACKUP_EXPIRY="14" \
     ALM_BACKUP_DIR="/var/opt/alminium-backup" \
     ALM_BACKUP_LOG="/opt/alminium/log/backup.log" \
-    ALM_VER="v3.3.1c" \
+    ALM_VER="v3.3.1d" \
     RM_VER=3.3.1 \
     DEBIAN_FRONTEND=noninteractive
     
@@ -33,26 +33,20 @@ RUN apt-get install -y apache2 bc g++ git \
     libdbi-perl libmagickcore-dev libmagickwand-dev \
     libmysqlclient-dev libsqlite3-dev libssl-dev make \
     mercurial mysql-server php-mysql ruby ruby-dev subversion \
-    unzip wget
+    supervisor unzip wget
 
 # clone alminium
 COPY ./install.sh ${ALM_HOME}/install.sh
 RUN ${ALM_HOME}/install.sh
 
-# install upervisor
-RUN apt-get install -y supervisor
-
 # Expose web
 EXPOSE 80 443
 
 # Define data volumes
-VOLUME ["/opt/alminium/files", "/var/opt/alminium", "/var/lib/mysql"]
+VOLUME ["/opt/alminium/files", "/var/opt/alminium", "/var/lib/mysql", "/var/log/alminium"]
 
 # supervisor config
 COPY ./supervisord.conf /etc/supervisord.conf
-
-# intialize script
-COPY ./update.sh ${ALM_HOME}/update.sh
 
 # working directory
 WORKDIR ${ALM_HOME}

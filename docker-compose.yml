@@ -1,6 +1,6 @@
 ALMinium:
   restart: always
-  image: ayapapa/docker-alminium:latest
+  image: ayapapa/docker-alminium:3.3.1d
 
   ports:
     - "10080:80"
@@ -29,3 +29,5 @@ ALMinium:
     - /home/alminium/files:/opt/alminium/files
     - /home/alminium/db:/var/lib/mysql
     - /home/alminium/repo:/var/opt/alminium
+    - /home/alminium/log:/var/log/alminium
+    - ./update.sh:/home/alm/update.sh

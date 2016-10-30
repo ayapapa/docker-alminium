@@ -41,18 +41,14 @@ fi
 #
 # log
 #
-if [ ! -d /opt/alminium/log ]
-then
-  mkdir /opt/alminium/log
-fi
-if [ ! -d /var/log/apache2 ]
-then
-  mkdir /var/log/apache2
-fi
-chown root:adm /var/log/apache2
-chmod 640 /var/log/apache2
-chown www-data:www-data /opt/alminium/log
-chmod 640 /opt/alminium/log
+mkdir -p /var/log/alminium
+mkdir -p /var/log/alminium/redmine
+mkdir -p /var/log/alminium/apache2
+mkdir -p /var/log/alminium/mysql
+chown www-data:www-data /var/log/alminium/redmine
+chown root:adm /var/log/alminium/apache2
+chown mysql:adm /var/log/alminium/mysql
+chmod 760 /var/log/alminium/*
 
 # HOSTNAME
 ALM_OLD_HOSTNAME=`cat /etc/opt/alminium/hostname`
