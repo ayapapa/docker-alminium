@@ -7,7 +7,7 @@ ALMinium:
     - "10443:443"
 
   environment:
-    - ALM_HOSTNAME=192.168.11.21
+    - ALM_HOSTNAME=www.example.com
     - ALM_RELATIVE_URL_ROOT=
     - ALM_ENABLE_AUTO_BACKUP=y
     - ALM_BACKUP_MINUTE=0
