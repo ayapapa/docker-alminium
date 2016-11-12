@@ -45,9 +45,9 @@ mkdir -p /var/log/alminium
 mkdir -p /var/log/alminium/redmine
 mkdir -p /var/log/alminium/apache2
 mkdir -p /var/log/alminium/mysql
-chown www-data:www-data /var/log/alminium/redmine
-chown root:adm /var/log/alminium/apache2
-chown mysql:adm /var/log/alminium/mysql
+chown -R www-data:www-data /var/log/alminium/redmine
+chown -R root:adm /var/log/alminium/apache2
+chown -R mysql:adm /var/log/alminium/mysql
 chmod 760 /var/log/alminium/*
 
 # HOSTNAME
