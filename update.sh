@@ -10,9 +10,11 @@ if [ ! -f /var/lib/mysql/initialized ]
 then
   cd / && tar xzf $ALM_HOME/db.tar.gz
   chown -R mysql:mysql /var/lib/mysql
+  service mysql start
 elif [ "`cat /opt/alminium/initialized`" != "`cat /var/lib/mysql/initialized`" ]
 then
   echo "update DB ..."
+  service mysql start
   cd /opt/alminium
   bundle exec rake db:migrate RAILS_ENV=production
   bundle exec rake redmine:plugins:migrate RAILS_ENV=production
@@ -20,6 +22,8 @@ then
   bundle exec rake tmp:sessions:clear RAILS_ENV=production
   cp -p /opt/alminium/initialized /var/lib/mysql/
   echo "...done"
+else
+  service mysql start
 fi
 
 #
@@ -183,6 +187,23 @@ if [ "$ALM_ENABLE_SSL_OLD" != "$ALM_ENABLE_SSL" ]; then
         > /etc/opt/alminium/redmine.conf
     a2dismod ssl
   fi
+fi
+
+# db setting
+# hostname
+if [ "$ALM_PORT" = "" -o "$ALM_PORT" = "80" -o "$ALM_PORT" = "443" ]; then
+  HOST_NAME="${ALM_HOSTNAME}${ALM_RELATIVE_URL_ROOT}"
+else
+  HOST_NAME="${ALM_HOSTNAME}:${ALM_PORT}${ALM_RELATIVE_URL_ROOT}"
+fi
+echo "UPDATE settings SET value='$HOST_NAME' WHERE name='host_name';" \
+     | mysql alminium
+# protocol
+if [ "$ALM_ENABLE_SSL" = "y" ]; then
+  echo "UPDATE settings SET value='https' WHERE name='protocol';" \
+       | mysql alminium
+else
+  echo "UPDATE settings SET value='http' WHERE name='protocol';" | mysql alminium
 fi
 
 # go to HOMEDIR
