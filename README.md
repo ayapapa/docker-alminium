@@ -15,6 +15,7 @@ refs:
 
 # Prerequisites
 ## install docker
+for example, in the case of Ubunt16.04:
 ```shell
 sudo apt-get update && sudo apt-get -y dist-upgrade
 curl -fsSL https://get.docker.com/ | sh
