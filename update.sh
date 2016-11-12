@@ -2,6 +2,7 @@
 #
 # update alminium
 #
+echo update ALMinium
 
 #
 # ALMinium's DB data
@@ -190,6 +191,10 @@ if [ "$ALM_ENABLE_SSL_OLD" != "$ALM_ENABLE_SSL" ]; then
 fi
 
 # db setting
+while [ "`service mysql status | grep stopped`" != "" ]
+do
+  sleep 3
+done
 # hostname
 if [ "$ALM_PORT" = "" -o "$ALM_PORT" = "80" -o "$ALM_PORT" = "443" ]; then
   HOST_NAME="${ALM_HOSTNAME}${ALM_RELATIVE_URL_ROOT}"
