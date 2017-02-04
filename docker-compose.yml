@@ -3,29 +3,23 @@ version: '2'
 services:
   mysql:
     restart: always
+
     image: sameersbn/mysql
-#    image: mysql:5.7
+
     volumes:
     - /home/alminium/db:/var/lib/mysql
-#    - ./db-data:/var/lib/mysql
-#    - ./log:/var/log
+    - /home/alminium/log:/var/log
+
     environment:
     - MYSQL_ROOT_PASSWORD= 
     - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      # $MYAPP_DATABASE_PASSWORD
     - DB_NAME=alminium
     - DB_USER=alminium
     - DB_PASS=alminium
-#    - MYSQL_DATABASE=alminium
-#    - MYSQL_USER=alminium
-#    - MYSQL_PASSWORD=alminium
-    #logging:
-    #  driver: syslog
-    #  options:
-    #    syslog-address: "udp://logs3.papertrailapp.com:xxx"
 
   alminium:
     restart: always
+
     image: ayapapa/docker-alminium:3.3.2
 
     ports:
@@ -34,6 +28,7 @@ services:
 
     depends_on:
     - mysql
+
     links:
     - mysql:db
 
@@ -47,9 +42,6 @@ services:
     - ALM_BACKUP_EXPIRY=14
     - ALM_ENABLE_SSL=N
     - ALM_PORT=10080
-
-#    - ALM_DB_HOST=db
-#    - ALM_DB_ROOT_PASS=
 
     - SMTP_ENABLED=false
     - SMTP_ENALBLE_STARTTLS_AUTO=true
