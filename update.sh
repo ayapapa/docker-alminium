@@ -2,29 +2,25 @@
 #
 # update alminium
 #
-echo update ALMinium
+
+ALM_SRC_DIR=${ALM_HOME}/alminium
+ALM_INSTALL_DIR=/opt/alminium
+ALM_SUBDIR=${ALM_RELATIVE_URL_ROOT}
+
+# 関数群
+source ${ALM_SRC_DIR}/inst-script/functions
+
+# start updating
+echo update ALMinium ...
 
 #
 # ALMinium's DB data
 #
-if [ ! -f /var/lib/mysql/initialized ]
-then
-  cd / && tar xzf $ALM_HOME/db.tar.gz
-  chown -R mysql:mysql /var/lib/mysql
-  service mysql start
-elif [ "`cat /opt/alminium/initialized`" != "`cat /var/lib/mysql/initialized`" ]
-then
-  echo "update DB ..."
-  service mysql start
-  cd /opt/alminium
-  bundle exec rake db:migrate RAILS_ENV=production
-  bundle exec rake redmine:plugins:migrate RAILS_ENV=production
-  bundle exec rake tmp:cache:clear RAILS_ENV=production
-  bundle exec rake tmp:sessions:clear RAILS_ENV=production
-  cp -p /opt/alminium/initialized /var/lib/mysql/
-  echo "...done"
-else
-  service mysql start
+if [ ! -f ${ALM_HOME}/initialized ]; then
+  # 未初期化状態なので初期化を行う
+  source ${ALM_SRC_DIR}/redmine/setup/setup-db
+  source ${ALM_SRC_DIR}/redmine/setup/install-plugins-jenkins
+  touch ${ALM_HOME}/initialized
 fi
 
 #
@@ -49,10 +45,8 @@ fi
 mkdir -p /var/log/alminium
 mkdir -p /var/log/alminium/redmine
 mkdir -p /var/log/alminium/apache2
-mkdir -p /var/log/alminium/mysql
 chown -R www-data:www-data /var/log/alminium/redmine
 chown -R root:adm /var/log/alminium/apache2
-chown -R mysql:adm /var/log/alminium/mysql
 chmod 760 /var/log/alminium/*
 
 # HOSTNAME
@@ -190,25 +184,19 @@ if [ "$ALM_ENABLE_SSL_OLD" != "$ALM_ENABLE_SSL" ]; then
   fi
 fi
 
-# db setting
-while [ "`service mysql status | grep stopped`" != "" ]
-do
-  sleep 3
-done
 # hostname
 if [ "$ALM_PORT" = "" -o "$ALM_PORT" = "80" -o "$ALM_PORT" = "443" ]; then
   HOST_NAME="${ALM_HOSTNAME}${ALM_RELATIVE_URL_ROOT}"
 else
   HOST_NAME="${ALM_HOSTNAME}:${ALM_PORT}${ALM_RELATIVE_URL_ROOT}"
 fi
-echo "UPDATE settings SET value='$HOST_NAME' WHERE name='host_name';" \
-     | mysql alminium
+db_update_setting host_name $HOST_NAME
+
 # protocol
 if [ "$ALM_ENABLE_SSL" = "y" ]; then
-  echo "UPDATE settings SET value='https' WHERE name='protocol';" \
-       | mysql alminium
+  db_update_setting protocol https
 else
-  echo "UPDATE settings SET value='http' WHERE name='protocol';" | mysql alminium
+  db_update_setting protocol http
 fi
 
 # go to HOMEDIR
