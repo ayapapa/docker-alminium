@@ -17,7 +17,7 @@ ENV ALM_HOME="/home/alm"  \
     ALM_BACKUP_EXPIRY="14" \
     ALM_BACKUP_DIR="/var/opt/alminium-backup" \
     ALM_BACKUP_LOG="/opt/alminium/log/backup.log" \
-    ALM_VER="v3.3.1e" \
+    ALM_VER="v3.3.1f" \
     RM_VER=3.3.1 \
     DEBIAN_FRONTEND=noninteractive
     
@@ -43,7 +43,7 @@ RUN ${ALM_HOME}/install.sh
 EXPOSE 80 443
 
 # Define data volumes
-VOLUME ["/opt/alminium/files", "/var/opt/alminium", "/var/lib/mysql", "/var/log/alminium"]
+VOLUME ["/opt/alminium/files", "/var/opt/alminium", "/var/opt/alminium-backup", "/var/lib/mysql", "/var/log/alminium"]
 
 # supervisor config
 COPY ./supervisord.conf /etc/supervisord.conf
