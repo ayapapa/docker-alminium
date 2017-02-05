@@ -31,4 +31,5 @@ ALMinium:
     - /home/alminium/db:/var/lib/mysql
     - /home/alminium/repo:/var/opt/alminium
     - /home/alminium/log:/var/log/alminium
+    - /home/alminium/backup:/var/opt/alminium-backup
     - ./update.sh:/home/alm/update.sh
