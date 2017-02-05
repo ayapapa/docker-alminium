@@ -1,37 +1,29 @@
 version: '2'
 
 services:
-  mysql:
+  MySQL:
     restart: always
-
-    image: sameersbn/mysql
-
+    image: mysql:5.7
     volumes:
     - /home/alminium/db:/var/lib/mysql
-    - /home/alminium/log:/var/log
-
+    - /home/alminium/log/mysql:/var/log/mysql
     environment:
     - MYSQL_ROOT_PASSWORD= 
     - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-    - DB_NAME=alminium
-    - DB_USER=alminium
-    - DB_PASS=alminium
+    - MYSQL_DATABASE=alminium
+    - MYSQL_USER=alminium
+    - MYSQL_PASSWORD=alminium
 
-  alminium:
+  ALMinium:
     restart: always
-
     image: ayapapa/docker-alminium:3.3.2
-
     ports:
     - "10080:80"
     - "10443:443"
-
     depends_on:
-    - mysql
-
+    - MySQL
     links:
-    - mysql:db
-
+    - MySQL:db
     environment:
     - ALM_HOSTNAME=192.168.11.20
     - ALM_RELATIVE_URL_ROOT=
@@ -57,4 +49,5 @@ services:
     - /home/alminium/db:/var/lib/mysql
     - /home/alminium/repo:/var/opt/alminium
     - /home/alminium/log:/var/log/alminium
+    - /home/alminium/backup:/var/opt/alminium-backup
     - ./update.sh:/home/alm/update.sh
