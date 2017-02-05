@@ -15,6 +15,7 @@ then
 elif [ "`cat /opt/alminium/initialized`" != "`cat /var/lib/mysql/initialized`" ]
 then
   echo "update DB ..."
+  chown -R mysql:mysql /var/lib/mysql
   service mysql start
   cd /opt/alminium
   bundle exec rake db:migrate RAILS_ENV=production
