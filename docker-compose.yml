@@ -13,7 +13,6 @@ services:
     - MYSQL_DATABASE=alminium
     - MYSQL_USER=alminium
     - MYSQL_PASSWORD=alminium
-    command: mysql -e "GRANT ALL PRIVILEGES ON alminium.* TO 'alminium'@'%' IDENTIFIED BY 'alminium'" mysql 2>/dev/null && mysqld
 
   ALMinium:
     restart: always
@@ -49,7 +48,6 @@ services:
 
     volumes:
     - /home/alminium/files:/opt/alminium/files
-    - /home/alminium/db:/var/lib/mysql
     - /home/alminium/repo:/var/opt/alminium
     - /home/alminium/log:/var/log/alminium
     - /home/alminium/backup:/var/opt/alminium-backup

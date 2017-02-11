@@ -38,5 +38,10 @@ apt-get -y purge bc libmagickcore-dev libmagickwand-dev libmysqlclient-dev \
            libsqlite3-dev libssl-dev make g++
 apt-get -y autoremove
 apt-get -y autoclean
-rm -r ${ALM_HOME}/alminium/{cache,docs,spec,test,jenkins,patch}
+rm -r ${ALM_HOME}/alminium/cache
+rm -r ${ALM_HOME}/alminium/docs
+rm -r ${ALM_HOME}/alminium/spec
+rm -r ${ALM_HOME}/alminium/test
+rm -r ${ALM_HOME}/alminium/jenkins
+rm -r ${ALM_HOME}/alminium/patch
 
