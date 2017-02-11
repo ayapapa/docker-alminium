@@ -27,6 +27,7 @@ then
 else
   service mysql start
 fi
+mysql -e "GRANT ALL PRIVILEGES ON alminium.* TO 'alminium'@'%' IDENTIFIED BY 'alminium'" mysql 2>/dev/null
 
 #
 # attachement files
