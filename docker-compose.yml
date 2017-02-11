@@ -13,10 +13,11 @@ services:
     - MYSQL_DATABASE=alminium
     - MYSQL_USER=alminium
     - MYSQL_PASSWORD=alminium
+    command: mysql -e "GRANT ALL PRIVILEGES ON alminium.* TO 'alminium'@'%' IDENTIFIED BY 'alminium'" mysql 2>/dev/null && mysqld
 
   ALMinium:
     restart: always
-    image: ayapapa/docker-alminium:3.3.2
+    image: ayapapa/docker-alminium:dev
     ports:
     - "10080:80"
     - "10443:443"
@@ -27,13 +28,15 @@ services:
     environment:
     - ALM_HOSTNAME=192.168.11.20
     - ALM_RELATIVE_URL_ROOT=
+    - ALM_PORT=10080
+    - ALM_ENABLE_SSL=N
+      # if ALM_ENABLE_SSL is set to y, self-signed certification will be used.
+
     - ALM_ENABLE_AUTO_BACKUP=y
     - ALM_BACKUP_MINUTE=0
     - ALM_BACKUP_HOUR=3
     - ALM_BACKUP_DAY=*/2
     - ALM_BACKUP_EXPIRY=14
-    - ALM_ENABLE_SSL=N
-    - ALM_PORT=10080
 
     - SMTP_ENABLED=false
     - SMTP_ENALBLE_STARTTLS_AUTO=true

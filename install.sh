@@ -29,10 +29,9 @@ fi
 date > /opt/alminium/initialized
 cp -p /opt/alminium/initialized /opt/alminium/files/
 cp -p /opt/alminium/initialized /var/opt/alminium/
-cp -p /opt/alminium/initialized /var/lib/mysql/
-tar czf ${ALM_HOME}/db.tar.gz /var/lib/mysql
-tar czf ${ALM_HOME}/files.tar.gz /opt/alminium/files
-tar czf ${ALM_HOME}/repo.tar.gz /var/opt/alminium
+cd /opt/alminium && tar czf ${ALM_HOME}/files.tar.gz ./files
+cd /var/opt && tar czf ${ALM_HOME}/repo.tar.gz ./alminium
+cd ${ALM_HOME}
 
 # delete resouces
 apt-get -y purge bc libmagickcore-dev libmagickwand-dev libmysqlclient-dev \

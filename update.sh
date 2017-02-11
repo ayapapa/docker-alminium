@@ -49,14 +49,14 @@ fi
 # attachement files
 #
 if [ ! -f /opt/alminium/files/initialized ]; then
-  cd / && tar xzf ${ALM_HOME}/files.tar.gz
+  cd /opt/alminium && tar xzf ${ALM_HOME}/files.tar.gz
 fi
 
 #
 # ALMinium's repo
 #
 if [ ! -f /var/opt/alminium/initialized ]; then
-  cd / && tar xzf ${ALM_HOME}/repo.tar.gz
+  cd /var/opt && tar xzf ${ALM_HOME}/repo.tar.gz
 fi
 
 # HOSTNAME
