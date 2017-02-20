@@ -5,50 +5,50 @@ services:
     restart: always
     image: mysql:5.7
     volumes:
-    - /home/alminium/db:/var/lib/mysql
-    - /home/alminium/log/mysql:/var/log/mysql
+      - /home/alminium/db:/var/lib/mysql
+      - /home/alminium/log/mysql:/var/log/mysql
     environment:
-    - MYSQL_ROOT_PASSWORD= 
-    - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-    - MYSQL_DATABASE=alminium
-    - MYSQL_USER=alminium
-    - MYSQL_PASSWORD=alminium
+      - MYSQL_ROOT_PASSWORD= 
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=alminium
+      - MYSQL_USER=alminium
+      - MYSQL_PASSWORD=alminium
 
   ALMinium:
     restart: always
     image: ayapapa/docker-alminium:dev
     ports:
-    - "10080:80"
-    - "10443:443"
+      - "10080:80"
+      - "10443:443"
     depends_on:
-    - MySQL
+      - MySQL
     links:
-    - MySQL:db
+      - MySQL:db
     environment:
-    - ALM_HOSTNAME=192.168.11.20
-    - ALM_RELATIVE_URL_ROOT=
-    - ALM_PORT=10080
-    - ALM_ENABLE_SSL=N
+      - ALM_HOSTNAME=192.168.11.20
+      - ALM_RELATIVE_URL_ROOT=
+      - ALM_PORT=10080
+      - ALM_ENABLE_SSL=N
       # if ALM_ENABLE_SSL is set to y, self-signed certification will be used.
 
-    - ALM_ENABLE_AUTO_BACKUP=y
-    - ALM_BACKUP_MINUTE=0
-    - ALM_BACKUP_HOUR=3
-    - ALM_BACKUP_DAY=*/2
-    - ALM_BACKUP_EXPIRY=14
+      - ALM_ENABLE_AUTO_BACKUP=y
+      - ALM_BACKUP_MINUTE=0
+      - ALM_BACKUP_HOUR=3
+      - ALM_BACKUP_DAY=*/2
+      - ALM_BACKUP_EXPIRY=14
 
-    - SMTP_ENABLED=false
-    - SMTP_ENALBLE_STARTTLS_AUTO=true
-    - SMTP_ADDRESS=smtp.gmail.com
-    - SMTP_PORT=587
-    - SMTP_DOMAIN=smtp.gmail.com
-    - SMTP_AUTHENTICATION=:login
-    - SMTP_USER_NAME=example@gmail.com
-    - SMTP_PASS=****
+      - SMTP_ENABLED=false
+      - SMTP_ENALBLE_STARTTLS_AUTO=true
+      - SMTP_ADDRESS=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_DOMAIN=smtp.gmail.com
+      - SMTP_AUTHENTICATION=:login
+      - SMTP_USER_NAME=example@gmail.com
+      - SMTP_PASS=****
 
     volumes:
-    - /home/alminium/files:/opt/alminium/files
-    - /home/alminium/repo:/var/opt/alminium
-    - /home/alminium/log:/var/log/alminium
-    - /home/alminium/backup:/var/opt/alminium-backup
-    - ./update.sh:/home/alm/update.sh
+      - /home/alminium/files:/opt/alminium/files
+      - /home/alminium/repo:/var/opt/alminium
+      - /home/alminium/log:/var/log/alminium
+      - /home/alminium/backup:/var/opt/alminium-backup
+      - ./update.sh:/home/alm/update.sh
