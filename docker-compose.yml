@@ -1,9 +1,9 @@
 version: '2'
 
 services:
-  MySQL:
+  db:
     restart: always
-    image: mysql:5.7
+    build: ./mysql
     volumes:
       - /home/alminium/db:/var/lib/mysql
       - /home/alminium/log/mysql:/var/log/mysql
@@ -21,9 +21,9 @@ services:
       - "10080:80"
       - "10443:443"
     depends_on:
-      - MySQL
+      - db
     links:
-      - MySQL:db
+      - db:db
     environment:
       - ALM_HOSTNAME=192.168.11.20
       - ALM_RELATIVE_URL_ROOT=

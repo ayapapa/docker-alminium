@@ -26,6 +26,7 @@ chmod 760 /var/log/alminium/*
 #
 # ALMinium's DB data
 #
+
 if [ ! -f ${ALM_HOME}/initialized ]; then
   # 未初期化状態なので初期化を行う
   while [ "`db_test`" = "" ]; do
