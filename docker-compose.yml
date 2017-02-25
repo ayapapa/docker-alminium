@@ -16,7 +16,7 @@ services:
 
   ALMinium:
     restart: always
-    image: ayapapa/docker-alminium:dev
+    image: ayapapa/docker-alminium:dev.1
     ports:
       - "10080:80"
       - "10443:443"

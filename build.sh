@@ -2,7 +2,11 @@
 
 RM_VERSION=$(cat ./RM_VERSION)
 ALM_VERSION=$(cat ./ALM_VERSION)
-DOCKER_ALM_VER=$(cat ./ALM_VERSION | sed "s/^[vV]//")
+DOCKER_ALM_REV=$(cat ./DOCKER_ALM_REV)
+if [ ! "${DOCKER_ALM_REV}" = "" ]; then
+  DOCKER_ALM_REV=.${DOCKER_ALM_REV}
+fi
+DOCKER_ALM_VER=$(cat ./ALM_VERSION | sed "s/^[vV]//")${DOCKER_ALM_REV}
 
 echo start to build docker-alminium
 echo "  Redmine Ver.  = ${RM_VERSION}"

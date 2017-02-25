@@ -35,9 +35,6 @@ if [ ! -f ${ALM_HOME}/initialized ]; then
   done
   echo "successed to connect db."
 
-  # avoid gems' version mismatch
-  rm $ALM_INSTALL_DIR/Gemfile.lock
-  
   # gem install for redmine_jenkins and db migration
   source ${ALM_SRC_DIR}/redmine/setup/setup-db
   pushd ${ALM_INSTALL_DIR}

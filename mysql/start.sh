@@ -4,7 +4,7 @@ service mysql start
 
 # wait db available
 OK=-1
-until [ "${OK}" != "0" ]; do
+while [ "${OK}" != "0" ]; do
   echo connecting to db
   mysql -e "SELECT user FROM user" mysql
   OK=$?
