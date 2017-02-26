@@ -7,12 +7,6 @@ services:
     volumes:
       - /home/alminium/db:/var/lib/mysql
       - /home/alminium/log/mysql:/var/log/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD= 
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_DATABASE=alminium
-      - MYSQL_USER=alminium
-      - MYSQL_PASSWORD=alminium
 
   ALMinium:
     restart: always

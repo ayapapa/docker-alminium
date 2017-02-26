@@ -1,14 +1,17 @@
 # docker image
 FROM mysql:5.7
 
-#environments
-ENV MYSQL_DATABASE=alminium \
-    MYSQL_USER=alminium \
-    MYSQL_PASSWORD=alminium
-
 # maintainer information
 MAINTAINER ayapapa ayapapajapan@yahoo.co.jp
 
+#environments(don't edit)
+ENV MYSQL_ROOT_PASSWORD= \
+    MYSQL_ALLOW_EMPTY_PASSWORD=yes \
+    MYSQL_DATABASE=alminium \
+    MYSQL_USER=alminium \
+    MYSQL_PASSWORD=alminium
+
+# set default charset to utf8
 RUN { \
     echo '[mysqld]'; \
     echo 'character-set-server=utf8'; \
@@ -26,5 +29,3 @@ WORKDIR /home/mysql
 # deamon
 ENTRYPOINT /home/mysql/start.sh
 
-# command
-#CMD /bin/bash
