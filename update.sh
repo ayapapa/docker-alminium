@@ -29,7 +29,7 @@ chmod 760 /var/log/alminium/*
 
 if [ ! -f ${ALM_HOME}/initialized ]; then
   # 未初期化状態なので初期化を行う
-  while [ "`db_test`" = "" ]; do
+  while [ "$(db_test alminium)" = "" ]; do
     echo "checking db connection..."
     sleep 3
   done
