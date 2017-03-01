@@ -11,7 +11,7 @@ ALM_SUBDIR=${ALM_RELATIVE_URL_ROOT}
 source ${ALM_SRC_DIR}/inst-script/functions
 
 # start updating
-echo update ALMinium ...
+echo $(date) - update ALMinium ...
 
 #
 # log
