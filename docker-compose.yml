@@ -46,3 +46,4 @@ services:
       - /home/alminium/log:/var/log/alminium
       - /home/alminium/backup:/var/opt/alminium-backup
       - ./update.sh:/home/alm/update.sh
+      - ./supervisord.conf:/etc/supervisord.conf
