@@ -31,17 +31,22 @@ cp -p /opt/alminium/initialized /opt/alminium/files/
 cp -p /opt/alminium/initialized /var/opt/alminium/
 cd /opt/alminium && tar czf ${ALM_HOME}/files.tar.gz ./files
 cd /var/opt && tar czf ${ALM_HOME}/repo.tar.gz ./alminium
+
+# buckup and restore script
 cd ${ALM_HOME}
+ln -s ./alminium/backup .
+ln -s ./alminium/restore .
+ln -s ./alminium/inst-scripts .
 
 # delete resouces
 apt-get -y purge bc libmagickcore-dev libmagickwand-dev libmysqlclient-dev \
            libsqlite3-dev libssl-dev make g++
 apt-get -y autoremove
 apt-get -y autoclean
-rm -r ${ALM_HOME}/alminium/cache
-rm -r ${ALM_HOME}/alminium/docs
-rm -r ${ALM_HOME}/alminium/spec
-rm -r ${ALM_HOME}/alminium/test
-rm -r ${ALM_HOME}/alminium/jenkins
-rm -r ${ALM_HOME}/alminium/patch
+cd ./alminium
+rm -r cache docs etc jenkins patch spec test \
+      Gemfile README.mkd RM_VERSION Rakefile gems.installed \
+      packages.installed smelt resmelt uninstall upgrade
 
+# go home
+cd ${ALM_HOME}
