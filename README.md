@@ -48,9 +48,9 @@ And you can change the hostname and the port number(defaults to 10080) by editin
 
 see https://docs.docker.com/compose/
 
-## Jenkins initialiation
+## Jenkins initialization
 インストール後、最初にJenkinsサービスにアクセスすると、初期化処理が開始されます。初期パスワードは、 ```/home/jenkins/secrets/initialAdminPassword``` を利用してください。
-また、ALMinium(Redmine)と認証連携をする場合は、初期化時あるいは初期化後に、*Redmine plugin*を有効化してください。
+また、ALMinium(Redmine)と認証連携をする場合は、初期化時あるいは初期化後に、**Redmine plugin**を有効化してください。
 その後、「Jenkinsの管理」→「グローバルセキュリティの設定」→「セキュリティを有効化」→「Redmineユーザー認証を選択」し、以下の通り設定してください。
 
 * Redmine DBMS	: MySQL
@@ -75,7 +75,7 @@ You can configure by modifying Envitonment Variables in docker-compose.yml.
 | ALM_BACKUP_HOUR   | Auto backup schedule, crontab hour section(0-23). Defaults to 3. |
 | ALM_BACKUP_DAY    | Auto backup schedule, crontab day section(0-31). Defaults to */2. |
 | ALM_BACKUP_EXPIRY | Auto backup schedule, how long (in days) to keep backups before they are deleted. Defaults to 14. |
-| JENKINS_ENABLED | Enable Jenkins, true or false. Defaults to false. If true, able to access by http[s]://{ALMinium Host}/jenkins |
+| JENKINS_ENABLED | Enable Jenkins, true or false. Defaults to false. If true, you can access Jenkins through "http[s]://{ALMinium Host}/jenkins" |
 | JENKINS_URL | Jenkins URL. Defaults to null. |
 | SMTP_ENABLED | Enable smtp mail delivery, true or false. Defaults to false. |
 | SMTP_ENALBLE_STARTTLS_AUTO | Enable STARTTLS, true or false. Defaults to true. |
