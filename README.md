@@ -29,7 +29,7 @@ for example:
 ```shell
 sudo su
 [sudo] password for user-name: (your password)
-curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ```
 
@@ -40,15 +40,26 @@ git clone https://github.com/ayapapa/docker-alminium.git
 cd docker-alminium  
 sudo docker-compose up -d  
 ```
+see https://docs.docker.com/compose/  
 You can use AMinium(Redmine + several plugins) trough web-browser with URL http://localhost:10080.  
-ブラウザで http://localhost:10080 をアクセスするとALMiniumが表示されます。  
 And you can change the hostname and the port number(defaults to 10080) by editing docker-composer.yml and restarting.  
-ホスト名、ポート番号など適切な設定に変更してお使いください。
-* 表示エラーになる場合は、しばらく待ってから、再表示してください。 ```sudo docker-compose up -d``` 実行後に、数十秒～数分程度の初期化処理が行われます。
-
-see https://docs.docker.com/compose/
+**After the ```sudo docker - compose up - d``` execution, initialization processing of several tens of seconds to several minutes is done. If the display error occurs in the browser, please wait for a while and then display again.**  
+ブラウザで http://localhost:10080 をアクセスするとALMiniumが表示されます。  
+ホスト名、ポート番号など適切な設定に変更してお使いください。  
+**```sudo docker-compose up -d``` 実行後に、数十秒～数分程度の初期化処理が行われます。ブラウザーで表示エラーになる場合は、しばらく待ってから、再表示してください。**
 
 ## Jenkins initialization
+After installation, when accessing Jenkins service for the first time, the initialization process starts. For initial password, use `` `/ home / jenkins / secrets / initialAdminPassword```.
+Also, when doing authentication collaboration with ALMinium (Redmine), please activate ** Redmine plugin ** at initialization or after initialization.
+After that, set "Jenkins management" → "Global security setting" → "Enable security" → "Select Redmine user authentication" and set as follows.
+* Redmine DBMS	: MySQL
+* DB Server	: server name or IP address of ALMinium
+* Port	    : 13306, or your DB's port number
+* DB name   : alminium
+* DB user	  : alminium
+* DB passwoerd: alminium
+* Redmine version: 1.2.0以上
+
 インストール後、最初にJenkinsサービスにアクセスすると、初期化処理が開始されます。初期パスワードは、 ```/home/jenkins/secrets/initialAdminPassword``` を利用してください。
 また、ALMinium(Redmine)と認証連携をする場合は、初期化時あるいは初期化後に、**Redmine plugin**を有効化してください。
 その後、「Jenkinsの管理」→「グローバルセキュリティの設定」→「セキュリティを有効化」→「Redmineユーザー認証を選択」し、以下の通り設定してください。
