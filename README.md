@@ -66,7 +66,7 @@ After that, set "Jenkins management" → "Global security setting" → "Enable s
 
 * Redmine DBMS	: MySQL
 * DBサーバー	: ALMiniumサーバー名またはIアドレス
-* ポート番号	: DBポート番号（デフォルトは、13306）
+* ポート番号	  : 13306、または、利用DBに応じて設定
 * データベース名: alminium
 * DBユーザー	: alminium
 * DBパスワード	: alminium
