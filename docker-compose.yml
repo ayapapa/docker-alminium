@@ -26,7 +26,7 @@ services:
 
   ALMinium:
     restart: always
-    image: ayapapa/docker-alminium:dev
+    image: ayapapa/docker-alminium:3.3.2a
     ports:
       - "10080:80"
       - "10443:443"
@@ -36,7 +36,7 @@ services:
       - db:db
     environment:
       - ALM_HOSTNAME=192.168.11.20
-      - ALM_RELATIVE_URL_ROOT=alminium
+      - ALM_RELATIVE_URL_ROOT=
       - ALM_PORT=10080
       - ALM_ENABLE_SSL=N
       # if ALM_ENABLE_SSL is set to y, self-signed certification will be used.

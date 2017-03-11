@@ -21,10 +21,13 @@ ENV ALM_HOME="/home/alm"  \
     ALM_BACKUP_DIR="/var/opt/alminium-backup" \
     ALM_BACKUP_LOG="/opt/alminium/log/backup.log" \
     ALM_DB_SETUP="N" \
-    ALM_VER="dev" \
+    ALM_VER="v3.3.2a" \
     RM_VER="3.3.2" \
     DEBIAN_FRONTEND="noninteractive"
     
+# copy install script
+COPY ./install.sh ${ALM_HOME}/install.sh
+
 # install packages
 RUN apt-get update && apt-get dist-upgrade -y && \
     apt-get install -y apache2 bc g++ git \
@@ -34,6 +37,7 @@ RUN apt-get update && apt-get dist-upgrade -y && \
       libmysqlclient-dev libsqlite3-dev libssl-dev make \
       mercurial mysql-client php-mysql ruby ruby-dev subversion \
       supervisor unzip wget && \
+    ${ALM_HOME}/install.sh && \
     apt-get clean -y && apt-get autoremove -y && apt-get autoclean && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt /tmp/*
 

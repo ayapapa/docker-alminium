@@ -46,10 +46,8 @@ ln -s ./alminium/restore .
 ln -s ./alminium/inst-scripts .
 
 # delete resouces
-apt-get -y purge bc libmagickcore-dev libmagickwand-dev libmysqlclient-dev \
-           libsqlite3-dev libssl-dev make g++
-apt-get -y autoremove
-apt-get -y autoclean
+apt-get -y purge bc libmagickcore-dev libmagickwand-dev \
+      libmysqlclient-dev libsqlite3-dev libssl-dev make g++
 cd ./alminium
 rm -r cache docs etc jenkins patch spec test \
       Gemfile README.mkd RM_VERSION Rakefile gems.installed \
