@@ -32,6 +32,13 @@ cp -p /opt/alminium/initialized /var/opt/alminium/
 cd /opt/alminium && tar czf ${ALM_HOME}/files.tar.gz ./files
 cd /var/opt && tar czf ${ALM_HOME}/repo.tar.gz ./alminium
 
+# update jenkins.conf
+sed -i -e "s/localhost/db/" \
+       -e "/BrowserMatch/a #proxypass" \
+       /etc/opt/alminium/jenkins.conf
+sed -i "/^#JENKINS#/d" \
+       /etc/opt/alminium/alminium.conf
+
 # buckup and restore script
 cd ${ALM_HOME}
 ln -s ./alminium/backup .

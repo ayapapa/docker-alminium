@@ -25,7 +25,7 @@ ENV ALM_HOME="/home/alm"  \
     RM_VER="{{RM_VER}}" \
     DEBIAN_FRONTEND="noninteractive"
     
-# install git
+# install packages
 RUN apt-get update && apt-get dist-upgrade -y && \
     apt-get install -y apache2 bc g++ git \
       imagemagick libapache2-mod-passenger libapache2-mod-perl2 \
@@ -45,10 +45,10 @@ RUN ${ALM_HOME}/install.sh
 EXPOSE 80 443
 
 # Define data volumes
-VOLUME ["/opt/alminium/files", "/var/opt/alminium", "/var/lib/mysql", "/var/log/alminium", "/home/alm/update.sh", "/etc/supervisord.conf"]
+VOLUME ["/opt/alminium/files", "/var/opt/alminium", "/var/lib/mysql", "/var/log/alminium"]
 
 # supervisor config
-#COPY ./supervisord.conf /etc/supervisord.conf
+COPY ./supervisord.conf /etc/supervisord.conf
 
 # working directory
 WORKDIR ${ALM_HOME}
@@ -58,4 +58,3 @@ ENTRYPOINT /usr/bin/supervisord -c /etc/supervisord.conf
 
 # command
 CMD /bin/bash
-
