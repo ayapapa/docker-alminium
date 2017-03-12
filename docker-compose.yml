@@ -1,35 +1,67 @@
-ALMinium:
-  restart: always
-  image: ayapapa/docker-alminium:3.3.1g
+version: '2'
 
-  ports:
-    - "10080:80"
-    - "10443:443"
+services:
+  db:
+    restart: always
+    build: ./mysql
+    ports:
+      - "13306:3306"
+    volumes:
+      - /home/alminium/db:/var/lib/mysql
+      - /home/alminium/log/mysql:/var/log/mysql
 
-  environment:
-    - ALM_HOSTNAME=192.168.11.20
-    - ALM_RELATIVE_URL_ROOT=
-    - ALM_ENABLE_AUTO_BACKUP=y
-    - ALM_BACKUP_MINUTE=0
-    - ALM_BACKUP_HOUR=3
-    - ALM_BACKUP_DAY=*/2
-    - ALM_BACKUP_EXPIRY=14
-    - ALM_ENABLE_SSL=N
-    - ALM_PORT=10080
+  jenkins:
+    restart: always
+    build: ./jenkins
+    ports:
+      - "18080:8080"
+      - "50000:50000"
+    links:
+      - db:db
+    environment:
+      - JAVA_OPTS="-Djava.awt.headless=true"
+      - JENKINS_OPTS="--prefix=/jenkins"
+    volumes:
+      - /home/jenkins:/var/jenkins_home
 
-    - SMTP_ENABLED=false
-    - SMTP_ENALBLE_STARTTLS_AUTO=true
-    - SMTP_ADDRESS=smtp.gmail.com
-    - SMTP_PORT=587
-    - SMTP_DOMAIN=smtp.gmail.com
-    - SMTP_AUTHENTICATION=:login
-    - SMTP_USER_NAME=example@gmail.com
-    - SMTP_PASS=****
+  ALMinium:
+    restart: always
+    image: ayapapa/docker-alminium:3.3.2a
+    ports:
+      - "10080:80"
+      - "10443:443"
+    depends_on:
+      - db
+    links:
+      - db:db
+    environment:
+      - ALM_HOSTNAME=192.168.11.20
+      - ALM_RELATIVE_URL_ROOT=
+      - ALM_PORT=10080
+      - ALM_ENABLE_SSL=N
+      # if ALM_ENABLE_SSL is set to y, self-signed certification will be used.
 
-  volumes:
-    - /home/alminium/files:/opt/alminium/files
-    - /home/alminium/db:/var/lib/mysql
-    - /home/alminium/repo:/var/opt/alminium
-    - /home/alminium/log:/var/log/alminium
-    - /home/alminium/backup:/var/opt/alminium-backup
-    - ./update.sh:/home/alm/update.sh
+      - ALM_ENABLE_AUTO_BACKUP=y
+      - ALM_BACKUP_MINUTE=0
+      - ALM_BACKUP_HOUR=3
+      - ALM_BACKUP_DAY=*/2
+      - ALM_BACKUP_EXPIRY=14
+
+      - SMTP_ENABLED=false
+      - SMTP_ENALBLE_STARTTLS_AUTO=true
+      - SMTP_ADDRESS=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_DOMAIN=smtp.gmail.com
+      - SMTP_AUTHENTICATION=:login
+      - SMTP_USER_NAME=example@gmail.com
+      - SMTP_PASS=****
+
+      - JENKINS_ENABLED=true
+      - JENKINS_URL=http://192.168.11.20:18080/jenkins
+
+    volumes:
+      - /home/alminium/files:/opt/alminium/files
+      - /home/alminium/repo:/var/opt/alminium
+      - /home/alminium/log:/var/log/alminium
+      - /home/alminium/backup:/var/opt/alminium-backup
+      - ./update.sh:/home/alm/update.sh

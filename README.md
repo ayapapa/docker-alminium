@@ -5,7 +5,7 @@
 
 # What?
 This is ALMinium's docker version without Jenkins. Once you install docker and docker-compose, you can use ALMinium easily with command "docker-compose up -d", and custormize easily by modifying docker-compose.yml.  
-ALMiniumのDocker版を作ってみるサイトです。 Jenkinsのインストールは無効としています。  
+ALMiniumのDocker版を作ってみるサイトです。
 docker-composeを利用していますので、docker-compose.ymlのホスト名、ポート番号や環境変数を変更することでカスタマイズ出来ます。起動は、"docker-compose up -d"と叩くだけです。  
 
 refs:  
@@ -29,7 +29,7 @@ for example:
 ```shell
 sudo su
 [sudo] password for user-name: (your password)
-curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ```
 
@@ -40,18 +40,37 @@ git clone https://github.com/ayapapa/docker-alminium.git
 cd docker-alminium  
 sudo docker-compose up -d  
 ```
+see https://docs.docker.com/compose/  
 You can use AMinium(Redmine + several plugins) trough web-browser with URL http://localhost:10080.  
-ブラウザで http://localhost:10080 をアクセスするとALMiniumが表示されます。  
 And you can change the hostname and the port number(defaults to 10080) by editing docker-composer.yml and restarting.  
-ホスト名、ポート番号など適切な設定に変更してお使いください。
+**After the ```sudo docker - compose up - d``` execution, initialization processing of several tens of seconds to several minutes is done. If the display error occurs in the browser, please wait for a while and then display again.**  
+ブラウザで http://localhost:10080 をアクセスするとALMiniumが表示されます。  
+ホスト名、ポート番号など適切な設定に変更してお使いください。  
+**```sudo docker-compose up -d``` 実行後に、数十秒～数分程度の初期化処理が行われます。ブラウザーで表示エラーになる場合は、しばらく待ってから、再表示してください。**
 
-see https://docs.docker.com/compose/
+## Jenkins initialization
+After installation, when accessing Jenkins service for the first time, the initialization process starts. For initial password, use `` `/ home / jenkins / secrets / initialAdminPassword```.
+Also, when doing authentication collaboration with ALMinium (Redmine), please activate ** Redmine plugin ** at initialization or after initialization.
+After that, set "Jenkins management" → "Global security setting" → "Enable security" → "Select Redmine user authentication" and set as follows.
+* Redmine DBMS	: MySQL
+* DB Server	: server name or IP address of ALMinium
+* Port	    : 13306, or your DB's port number
+* DB name   : alminium
+* DB user	  : alminium
+* DB passwoerd: alminium
+* Redmine version: 1.2.0以上
 
-## Start with Docker command
-```shell
-$ sudo docker pull ayapapa/docker-alminium:(newest revision)
-$ sudo docker run --name=docker-alminium -v /home/alminium/files:/opt/alminium/files -v /home/alminium/db:/var/lib/mysql -v /home/alminium/data:/var/opt/alminium -v /home/alminium/conf:/etc/opt/alminium -p 80:80 ayapapa/docker-alminium:(newest revision)
-```
+インストール後、最初にJenkinsサービスにアクセスすると、初期化処理が開始されます。初期パスワードは、 ```/home/jenkins/secrets/initialAdminPassword``` を利用してください。
+また、ALMinium(Redmine)と認証連携をする場合は、初期化時あるいは初期化後に、**Redmine plugin**を有効化してください。
+その後、「Jenkinsの管理」→「グローバルセキュリティの設定」→「セキュリティを有効化」→「Redmineユーザー認証を選択」し、以下の通り設定してください。
+
+* Redmine DBMS	: MySQL
+* DBサーバー	: ALMiniumサーバー名またはIアドレス
+* ポート番号	  : 13306、または、利用DBに応じて設定
+* データベース名: alminium
+* DBユーザー	: alminium
+* DBパスワード	: alminium
+* Redmineバージョン: 1.2.0以上
 
 # Environment Variables  
 You can configure by modifying Envitonment Variables in docker-compose.yml.  
@@ -67,6 +86,8 @@ You can configure by modifying Envitonment Variables in docker-compose.yml.
 | ALM_BACKUP_HOUR   | Auto backup schedule, crontab hour section(0-23). Defaults to 3. |
 | ALM_BACKUP_DAY    | Auto backup schedule, crontab day section(0-31). Defaults to */2. |
 | ALM_BACKUP_EXPIRY | Auto backup schedule, how long (in days) to keep backups before they are deleted. Defaults to 14. |
+| JENKINS_ENABLED | Enable Jenkins, true or false. Defaults to false. If true, you can access Jenkins through "http[s]://{ALMinium Host}/jenkins" |
+| JENKINS_URL | Jenkins URL. Defaults to null. |
 | SMTP_ENABLED | Enable smtp mail delivery, true or false. Defaults to false. |
 | SMTP_ENALBLE_STARTTLS_AUTO | Enable STARTTLS, true or false. Defaults to true. |
 | SMTP_ADDRESS | SMTP server host address. Defaults to smtp.gmail.com |
