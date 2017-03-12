@@ -26,7 +26,6 @@ chmod 760 /var/log/alminium/*
 #
 # ALMinium's DB data
 #
-
 if [ ! -f ${ALM_HOME}/initialized ]; then
   # 未初期化状態なので初期化を行う
   while [ "$(db_test alminium)" = "" ]; do
@@ -46,6 +45,7 @@ if [ ! -f ${ALM_HOME}/initialized ]; then
   popd
   touch ${ALM_HOME}/initialized
 fi
+mysql -e "GRANT ALL PRIVILEGES ON alminium.* TO 'alminium'@'%' IDENTIFIED BY 'alminium'" mysql 2>/dev/null
 
 #
 # attachement files
@@ -226,4 +226,3 @@ fi
 cd ${ALM_HOME}
 
 service apache2 restart
-

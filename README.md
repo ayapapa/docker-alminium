@@ -77,7 +77,7 @@ You can configure by modifying Envitonment Variables in docker-compose.yml.
 
 | name | description |
 |:-----|:------------|
-| ALM_HOSTNAME | The hostname of the ALMinium server. It should be set to server name or IP address, to be accessable from clients. Defaults to www.example.com. |
+| ALM_HOSTNAME | The hostname of the ALMinium server. It should be set to server name or IP address, to be accessable from clients. Defaults to 192.168.11.20 |
 | ALM_PORT | The port of the ALMinium server. This value indicates the public port on which the ALMinium application will be accessible on the network and appropriately configures ALMinium to generate the correct urls. It does not affect the port on which the internal apache2 server will be listening on. Defaults to 443 if ALM_ENABLE_SSL=y, else defaults to 80. |
 | ALM_ENABLE_SSL | Enable SSL, y(es) or N(o). Defaults to N. Enabling this, self-signed certification will be created and used automatically(*). |
 | ALM_RELATIVE_URL_ROOT | The relative url of the ALMinium server. If set "alminium", you can access http://localhost:10080/alminium/. Defaults to null, means no sub-directory. |
