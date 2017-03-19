@@ -28,7 +28,7 @@ ENV ALM_HOME="/home/alm"  \
 # copy install script
 COPY ./install.sh ${ALM_HOME}/install.sh
 
-# install packages
+# install packages and install redmine
 RUN apt-get update && apt-get dist-upgrade -y && \
     apt-get install -y apache2 bc g++ git \
       imagemagick libapache2-mod-passenger libapache2-mod-perl2 \
@@ -41,15 +41,11 @@ RUN apt-get update && apt-get dist-upgrade -y && \
     apt-get clean -y && apt-get autoremove -y && apt-get autoclean && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt /tmp/*
 
-# clone alminium
-COPY ./install.sh ${ALM_HOME}/install.sh
-RUN ${ALM_HOME}/install.sh
-
 # Expose web
 EXPOSE 80 443
 
 # Define data volumes
-VOLUME ["/opt/alminium/files", "/var/opt/alminium", "/var/opt/alminium-backup", "/var/lib/mysql", "/var/log/alminium"]
+VOLUME ["/opt/alminium/files", "/var/opt/alminium", "/var/lib/mysql", "/var/log/alminium"]
 
 # supervisor config
 COPY ./supervisord.conf /etc/supervisord.conf

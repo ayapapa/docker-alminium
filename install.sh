@@ -34,7 +34,6 @@ cd /var/opt && tar czf ${ALM_HOME}/repo.tar.gz ./alminium
 
 # update jenkins.conf
 sed -i -e "s/localhost/db/" \
-       -e "/BrowserMatch/a #proxypass" \
        /etc/opt/alminium/jenkins.conf
 sed -i "/^#JENKINS#/d" \
        /etc/opt/alminium/alminium.conf
