@@ -37,7 +37,7 @@ if [ ! -f ${ALM_HOME}/initialized ]; then
   # gem install for redmine_jenkins and db migration
   source ${ALM_SRC_DIR}/redmine/setup/setup-db
   pushd ${ALM_INSTALL_DIR}
-  mv plugins-jenkins/* plugins/
+  mv plugins-jenkins/* plugins/  2>/dev/null
   bundle install --path vendor/bundle \
                  --without development test postgresql sqlite xapian
   bundle exec rake redmine:plugins:migrate \
