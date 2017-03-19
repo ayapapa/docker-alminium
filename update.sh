@@ -211,9 +211,8 @@ fi
 #
 if [ "${JENKINS_ENABLED}" = "true" ]; then
   sed -i -e "/ProxyPass/d" \
-         -e "/BrowserMatch/a \  ProxyPassReverse ${JENKINS_URL}/" \
-         -e "/BrowserMatch/a \  ProxyPass        ${JENKINS_URL}/" \
-         -e "/RewriteEngine/a \  RedirectMatch ^/(.*)$ ${JENKINS_URL}/" \
+         -e "/BrowserMatch/a \  ProxyPassReverse ${JENKINS_URL}" \
+         -e "/BrowserMatch/a \  ProxyPass        ${JENKINS_URL}" \
          /etc/opt/alminium/jenkins.conf
   sed -i -e "/jenkins\.conf/d" \
 	 -e "/maven\.conf$/a Include \/etc\/opt\/alminium\/jenkins.conf" \

@@ -49,7 +49,7 @@ RUN ${ALM_HOME}/install.sh
 EXPOSE 80 443
 
 # Define data volumes
-VOLUME ["/opt/alminium/files", "/var/opt/alminium", "/var/opt/alminium-backup", "/var/lib/mysql", "/var/log/alminium"]
+VOLUME ["/opt/alminium/files", "/var/opt/alminium", "/var/lib/mysql", "/var/log/alminium"]
 
 # supervisor config
 COPY ./supervisord.conf /etc/supervisord.conf
