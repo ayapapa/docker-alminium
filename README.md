@@ -49,7 +49,7 @@ And you can change the hostname and the port number(defaults to 10080) by editin
 **```sudo docker-compose up -d``` 実行後に、数十秒～数分程度の初期化処理が行われます。ブラウザーで表示エラーになる場合は、しばらく待ってから、再表示してください。**
 
 ## Jenkins initialization
-After installation, when accessing Jenkins service for the first time, the initialization process starts. For initial password, use ```/ home / jenkins / secrets / initialAdminPassword```.
+After installation, when accessing Jenkins service for the first time, the initialization process starts. For initial password, use ```/home/jenkins/secrets/initialAdminPassword```.
 Also, when doing authentication collaboration with ALMinium (Redmine), please activate ** Redmine plugin ** at initialization or after initialization.
 After that, set "Jenkins management" → "Global security setting" → "Enable security" → "Select Redmine user authentication" and set as follows.
 * Redmine DBMS	: MySQL
