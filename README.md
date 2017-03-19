@@ -5,7 +5,7 @@
 
 # What?
 This is ALMinium's docker version without Jenkins. Once you install docker and docker-compose, you can use ALMinium easily with command "docker-compose up -d", and custormize easily by modifying docker-compose.yml.  
-ALMiniumのDocker版を作ってみるサイトです。
+(Japanese) ALMiniumのDocker版を作ってみるサイトです。
 docker-composeを利用していますので、docker-compose.ymlのホスト名、ポート番号や環境変数を変更することでカスタマイズ出来ます。起動は、"docker-compose up -d"と叩くだけです。  
 
 refs:  
@@ -43,8 +43,8 @@ sudo docker-compose up -d
 see https://docs.docker.com/compose/  
 You can use AMinium(Redmine + several plugins) trough web-browser with URL http://localhost:10080.  
 And you can change the hostname and the port number(defaults to 10080) by editing docker-composer.yml and restarting.  
-**After the ```sudo docker - compose up - d``` execution, initialization processing of several tens of seconds to several minutes is done. If the display error occurs in the browser, please wait for a while and then display again.**  
-ブラウザで http://localhost:10080 をアクセスするとALMiniumが表示されます。  
+**After the ```sudo docker-compose up -d``` execution, initialization processing of several tens of seconds to several minutes is done. If the display error occurs in the browser, please wait for a while and then display again.**  
+(Japanese)ブラウザで http://localhost:10080 をアクセスするとALMiniumが表示されます。  
 ホスト名、ポート番号など適切な設定に変更してお使いください。  
 **```sudo docker-compose up -d``` 実行後に、数十秒～数分程度の初期化処理が行われます。ブラウザーで表示エラーになる場合は、しばらく待ってから、再表示してください。**
 
@@ -53,20 +53,20 @@ After installation, when accessing Jenkins service for the first time, the initi
 Also, when doing authentication collaboration with ALMinium (Redmine), please activate ** Redmine plugin ** at initialization or after initialization.
 After that, set "Jenkins management" → "Global security setting" → "Enable security" → "Select Redmine user authentication" and set as follows.
 * Redmine DBMS	: MySQL
-* DB Server	: server name or IP address of ALMinium
-* Port	    : 13306, or your DB's port number
-* DB name   : alminium
-* DB user	  : alminium
+* DB Server	: db
+* Port		: 3306
+* DB name	: alminium
+* DB user	: alminium
 * DB passwoerd: alminium
 * Redmine version: 1.2.0以上
 
-インストール後、最初にJenkinsサービスにアクセスすると、初期化処理が開始されます。初期パスワードは、 ```/home/jenkins/secrets/initialAdminPassword``` を利用してください。
+(Japanese)インストール後、最初にJenkinsサービスにアクセスすると、初期化処理が開始されます。初期パスワードは、 ```/home/jenkins/secrets/initialAdminPassword``` を利用してください。
 また、ALMinium(Redmine)と認証連携をする場合は、初期化時あるいは初期化後に、**Redmine plugin**を有効化してください。
 その後、「Jenkinsの管理」→「グローバルセキュリティの設定」→「セキュリティを有効化」→「Redmineユーザー認証を選択」し、以下の通り設定してください。
 
 * Redmine DBMS	: MySQL
-* DBサーバー	: ALMiniumサーバー名またはIアドレス
-* ポート番号	  : 13306、または、利用DBに応じて設定
+* DBサーバー	: db
+* ポート番号	: 3306
 * データベース名: alminium
 * DBユーザー	: alminium
 * DBパスワード	: alminium
@@ -77,17 +77,17 @@ You can configure by modifying Envitonment Variables in docker-compose.yml.
 
 | name | description |
 |:-----|:------------|
-| ALM_HOSTNAME | The hostname of the ALMinium server. It should be set to server name or IP address, to be accessable from clients. Defaults to 192.168.11.20 |
+| ALM_HOSTNAME | The hostname of the ALMinium server. It should be set to server name or IP address, to be accessable from clients. |
 | ALM_PORT | The port of the ALMinium server. This value indicates the public port on which the ALMinium application will be accessible on the network and appropriately configures ALMinium to generate the correct urls. It does not affect the port on which the internal apache2 server will be listening on. Defaults to 443 if ALM_ENABLE_SSL=y, else defaults to 80. |
 | ALM_ENABLE_SSL | Enable SSL, y(es) or N(o). Defaults to N. Enabling this, self-signed certification will be created and used automatically(*). |
-| ALM_RELATIVE_URL_ROOT | The relative url of the ALMinium server. If set "alminium", you can access http://localhost:10080/alminium/. Defaults to null, means no sub-directory. |
+| ALM_RELATIVE_URL_ROOT | The relative url of the ALMinium server. If set "alminium", you can access http://localhost:10080/alminium/ Defaults to null, means no sub-directory. |
 | ALM_ENABLE_AUTO_BACKUP | Enable auto backup, y(es) or N(o). Defaults to y. | 
 | ALM_BACKUP_MINUTE | Auto backup schedule, crontab minute section(0-59). Defaults to 0. |
 | ALM_BACKUP_HOUR   | Auto backup schedule, crontab hour section(0-23). Defaults to 3. |
 | ALM_BACKUP_DAY    | Auto backup schedule, crontab day section(0-31). Defaults to */2. |
 | ALM_BACKUP_EXPIRY | Auto backup schedule, how long (in days) to keep backups before they are deleted. Defaults to 14. |
 | JENKINS_ENABLED | Enable Jenkins, true or false. Defaults to false. If true, you can access Jenkins through "http[s]://{ALMinium Host}/jenkins" |
-| JENKINS_URL | Jenkins URL. Defaults to null. |
+| JENKINS_URL | Jenkins URL. If JENKINS_ENABLED is true, you must specify this. Defaults to http://jenkins:8080/jenkins |
 | SMTP_ENABLED | Enable smtp mail delivery, true or false. Defaults to false. |
 | SMTP_ENALBLE_STARTTLS_AUTO | Enable STARTTLS, true or false. Defaults to true. |
 | SMTP_ADDRESS | SMTP server host address. Defaults to smtp.gmail.com |
