@@ -4,8 +4,6 @@ services:
   db:
     restart: always
     build: ./mysql
-    ports:
-      - "13306:3306"
     volumes:
       - /home/alminium/db:/var/lib/mysql
       - /home/alminium/log/mysql:/var/log/mysql
@@ -14,7 +12,6 @@ services:
     restart: always
     build: ./jenkins
     ports:
-      - "18080:8080"
       - "50000:50000"
     links:
       - db:db
