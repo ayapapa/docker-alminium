@@ -21,8 +21,8 @@ ENV ALM_HOME="/home/alm"  \
     ALM_BACKUP_DIR="/var/opt/alminium-backup" \
     ALM_BACKUP_LOG="/opt/alminium/log/backup.log" \
     ALM_DB_SETUP="N" \
-    ALM_VER="v3.3.2a" \
-    RM_VER="3.3.2" \
+    ALM_VER="v3.3.3" \
+    RM_VER="3.3.3" \
     DEBIAN_FRONTEND="noninteractive"
     
 # copy install script
