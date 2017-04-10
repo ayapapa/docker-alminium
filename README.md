@@ -4,7 +4,7 @@
 [![](https://images.microbadger.com/badges/version/ayapapa/docker-alminium.svg)](https://microbadger.com/images/ayapapa/docker-alminium "Get your own version badge on microbadger.com")
 
 # What?
-This is ALMinium's docker version without Jenkins. Once you install docker and docker-compose, you can use ALMinium easily with command "docker-compose up -d", and custormize easily by modifying docker-compose.yml.  
+This is ALMinium's docker version. Once you install docker and docker-compose, you can use ALMinium easily with command "docker-compose up -d", and custormize easily by modifying docker-compose.yml.
 (Japanese) ALMiniumのDocker版を作ってみるサイトです。
 docker-composeを利用していますので、docker-compose.ymlのホスト名、ポート番号や環境変数を変更することでカスタマイズ出来ます。起動は、"docker-compose up -d"と叩くだけです。  
 
