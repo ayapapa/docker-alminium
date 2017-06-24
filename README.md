@@ -74,7 +74,7 @@ After that, set "Jenkins management" → "Global security setting" → "Enable s
 * Redmineバージョン: 1.2.0以上
 
 ## To use behind a proxy 
-To use behind a proxy, please add environment variables, **http_proxy** and **https_proxy** into docker-compose.yml.
+To use behind a proxy, please add environment variables, **http_proxy** and **https_proxy**, into docker-compose.yml.
 
 # Environment Variables  
 You can configure by modifying Envitonment Variables in docker-compose.yml.  
