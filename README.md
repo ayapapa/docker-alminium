@@ -5,6 +5,7 @@
 
 # What?
 This is ALMinium's docker version. Once you install docker and docker-compose, you can use ALMinium easily with command "docker-compose up -d", and custormize easily by modifying docker-compose.yml.
+
 (Japanese) ALMiniumのDocker版を作ってみるサイトです。
 docker-composeを利用していますので、docker-compose.ymlのホスト名、ポート番号や環境変数を変更することでカスタマイズ出来ます。起動は、"docker-compose up -d"と叩くだけです。  
 
@@ -29,7 +30,7 @@ for example:
 ```shell
 sudo su
 [sudo] password for user-name: (your password)
-curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+curl -L https://github.com/docker/compose/releases/download/1.14.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ```
 
@@ -71,6 +72,9 @@ After that, set "Jenkins management" → "Global security setting" → "Enable s
 * DBユーザー	: alminium
 * DBパスワード	: alminium
 * Redmineバージョン: 1.2.0以上
+
+## To use behind a proxy 
+To use behind a proxy, please add environment variables, **http_proxy** and **https_proxy**, into docker-compose.yml.
 
 # Environment Variables  
 You can configure by modifying Envitonment Variables in docker-compose.yml.  
