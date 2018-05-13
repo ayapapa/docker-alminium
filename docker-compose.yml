@@ -23,7 +23,7 @@ services:
 
   ALMinium:
     restart: always
-    image: ayapapa/docker-alminium:3.4.4
+    image: ayapapa/docker-alminium:3.4.5
     ports:
       - "10080:80"
       - "10443:443"
@@ -33,7 +33,7 @@ services:
       - db:db
       - jenkins:jenkins
     environment:
-      - ALM_HOSTNAME=www.sample.com
+      - ALM_HOSTNAME=www.example.com
       - ALM_RELATIVE_URL_ROOT=
       - ALM_PORT=10080
       - ALM_ENABLE_SSL=N
