@@ -33,7 +33,7 @@ services:
       - db:db
       - jenkins:jenkins
     environment:
-      - ALM_HOSTNAME=192.168.11.20
+      - ALM_HOSTNAME=www.sample.com
       - ALM_RELATIVE_URL_ROOT=
       - ALM_PORT=10080
       - ALM_ENABLE_SSL=N
