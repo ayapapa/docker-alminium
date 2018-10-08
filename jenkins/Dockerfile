@@ -1,5 +1,5 @@
 # docker image
-FROM jenkins:alpine
+FROM jenkinsci/jenkins:alpine
 
 # maintainer information
 MAINTAINER ayapapa ayapapajapan@yahoo.co.jp
