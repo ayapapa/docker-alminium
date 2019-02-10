@@ -42,7 +42,7 @@ sed -i "/^#JENKINS#/d" \
 cd ${ALM_HOME}
 ln -s ./alminium/backup .
 ln -s ./alminium/restore .
-ln -s ./alminium/inst-scripts .
+ln -s ./alminium/inst-script .
 
 # delete resouces
 apt-get -y purge bc libmagickcore-dev libmagickwand-dev \
