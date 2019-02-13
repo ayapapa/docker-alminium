@@ -21,7 +21,7 @@ ENV ALM_HOME="/home/alm"  \
     ALM_BACKUP_DIR="/var/opt/alminium-backup" \
     ALM_BACKUP_LOG="/opt/alminium/log/backup.log" \
     ALM_DB_SETUP="N" \
-    ALM_VER="3.4.7" \
+    ALM_VER="v3.4.7.1" \
     RM_VER="3.4.7" \
     DEBIAN_FRONTEND="noninteractive"
     
