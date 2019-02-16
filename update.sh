@@ -35,6 +35,7 @@ if [ ! -f ${ALM_HOME}/initialized ]; then
   echo "successed to connect db."
 
   # gem install for redmine_jenkins and db migration
+  BUNDLER=bundle
   source ${ALM_SRC_DIR}/redmine/setup/setup-db
   pushd ${ALM_INSTALL_DIR}
   mv plugins-jenkins/* plugins/  2>/dev/null
@@ -46,6 +47,7 @@ if [ ! -f ${ALM_HOME}/initialized ]; then
   touch ${ALM_HOME}/initialized
 fi
 mysql -e "GRANT ALL PRIVILEGES ON alminium.* TO 'alminium'@'%' IDENTIFIED BY 'alminium'" mysql 2>/dev/null
+echo "db service is ready."
 
 #
 # attachement files
@@ -53,6 +55,7 @@ mysql -e "GRANT ALL PRIVILEGES ON alminium.* TO 'alminium'@'%' IDENTIFIED BY 'al
 if [ ! -f /opt/alminium/files/initialized ]; then
   cd /opt/alminium && tar xzf ${ALM_HOME}/files.tar.gz
 fi
+echo "attachement files are ready."
 
 #
 # ALMinium's repo
@@ -60,6 +63,7 @@ fi
 if [ ! -f /var/opt/alminium/initialized ]; then
   cd /var/opt && tar xzf ${ALM_HOME}/repo.tar.gz
 fi
+echo "repositories are ready."
 
 # HOSTNAME
 ALM_OLD_HOSTNAME=`cat /etc/opt/alminium/hostname`
@@ -73,6 +77,8 @@ if [ "${ALM_OLD_HOSTNAME}" != "${ALM_HOSTNAME}" ]; then
   done
   echo ${ALM_HOSTNAME} > /etc/opt/alminium/hostname
 fi
+echo "HOSTNAME settings are ready."
+echo "HOSTNAME is ${ALM_HOSTNAME} (old name is ${ALM_OLD_HOSTNAME})"
 
 #
 # RELATIVE_PATH
@@ -118,7 +124,6 @@ then
     REPLACE_TO="RailsBaseURI ${NEW_PATH}"
     mv /var/www/html/${ALM_OLD_REL_PATH} /var/www/html/${ALM_NEW_REL_PATH}
   fi
-
   # modify apache configuration
   cd /etc/opt/alminium
   for FILE in $(ls redmine*.conf vcs.conf)
@@ -136,6 +141,8 @@ then
   # modify current relative path
   echo ${ALM_NEW_REL_PATH} > /etc/opt/alminium/relative_path
 fi
+echo "rerative settings are ready."
+echo "rerative path is ${ALM_NEW_REL_PATH} (old name is ${ALM_OLD_REL_PATH})"
 
 #
 # email

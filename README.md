@@ -61,6 +61,8 @@ After that, set "Jenkins management" → "Global security setting" → "Enable s
 * DB passwoerd: alminium
 * Redmine version: 1.2.0以上
 
+If you need Jenkins configuration file, you can find /home/jenkins on the host PC.
+
 (Japanese)インストール後、最初にJenkinsサービスにアクセスすると、初期化処理が開始されます。初期パスワードは、 ```/home/jenkins/secrets/initialAdminPassword``` を利用してください。
 また、ALMinium(Redmine)と認証連携をする場合は、初期化時あるいは初期化後に、**Redmine plugin**を有効化してください。
 その後、「Jenkinsの管理」→「グローバルセキュリティの設定」→「セキュリティを有効化」→「Redmineユーザー認証を選択」し、以下の通り設定してください。
@@ -72,6 +74,9 @@ After that, set "Jenkins management" → "Global security setting" → "Enable s
 * DBユーザー	: alminium
 * DBパスワード	: alminium
 * Redmineバージョン: 1.2.0以上
+
+※Jenkins設定ファイルは、/home/jenkinsに格納されています。
+
 
 ## To use behind a proxy 
 To use behind a proxy, please add environment variables, **http_proxy** and **https_proxy**, into docker-compose.yml.
