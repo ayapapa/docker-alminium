@@ -19,11 +19,12 @@ services:
       - JAVA_OPTS="-Djava.awt.headless=true"
       - JENKINS_OPTS="--prefix=/jenkins"
     volumes:
-      - /home/jenkins:/var/jenkins_home
+      - /home/jenkins:/var/lib/jenkins
+      - ./jenkins/start.sh:/var/lib/jenkins/start.sh
 
   ALMinium:
     restart: always
-    image: ayapapa/docker-alminium:3.4.8
+    image: ayapapa/docker-alminium:3.4.8.3
     ports:
       - "10080:80"
       - "10443:443"

@@ -21,7 +21,7 @@ ENV ALM_HOME="/home/alm"  \
     ALM_BACKUP_DIR="/var/opt/alminium-backup" \
     ALM_BACKUP_LOG="/opt/alminium/log/backup.log" \
     ALM_DB_SETUP="N" \
-    ALM_VER="v3.4.8" \
+    ALM_VER="v3.4.8.3" \
     RM_VER="3.4.8" \
     DEBIAN_FRONTEND="noninteractive"
     
@@ -37,7 +37,7 @@ RUN apt-get update && \
       libapache2-mod-wsgi libapache2-svn libdbd-mysql-perl \
       libdbi-perl libmagickcore-dev libmagickwand-dev \
       libmysqlclient-dev libsqlite3-dev libssl-dev make \
-      mercurial mysql-client php-mysql ruby ruby-dev subversion \
+      mercurial mysql-client php-mysql ruby ruby-dev ssl-cert subversion \
       supervisor unzip wget && \
     ${ALM_HOME}/install.sh && \
     apt-get clean -y && \
