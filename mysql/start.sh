@@ -22,11 +22,8 @@ if [ "${DB_EXIST}" = "" ]; then
 fi
 
 # add remote alminium user
-REMOTE_USER_EXIST=$(mysql -e "SELECT user,host FROM user" mysql | grep alminium | grep %)
-if [ "${REMOTE_USER_EXIST}" = "" ]; then
-  mysql -e "GRANT ALL PRIVILEGES ON alminium.* TO 'alminium'@'%' IDENTIFIED BY 'alminium'"
-  mysql -e "GRANT PROCESS ON *.* TO 'alminium'@'%' IDENTIFIED BY 'alminium';"
-fi
+mysql -e "GRANT ALL PRIVILEGES ON alminium.* TO 'alminium'@'%' IDENTIFIED BY 'alminium';"
+mysql -e "GRANT PROCESS ON *.* TO 'alminium'@'%' IDENTIFIED BY 'alminium';"
 
 # keep running this docker
 sleep infinity
