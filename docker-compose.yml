@@ -4,6 +4,7 @@ services:
   db:
     restart: always
     build: ./mysql
+    image: ayapapa/dockeralminium_db
     volumes:
       - /home/alminium/db:/var/lib/mysql
       - /home/alminium/log/mysql:/var/log/mysql
@@ -11,6 +12,7 @@ services:
   jenkins:
     restart: always
     build: ./jenkins
+    image: ayapapa/dockeralminium_jenkins
     ports:
       - "50000:50000"
     links:
@@ -24,7 +26,7 @@ services:
 
   ALMinium:
     restart: always
-    image: ayapapa/docker-alminium:3.4.8.3
+    image: ayapapa/docker-alminium:3.4.8.4
     ports:
       - "10080:80"
       - "10443:443"

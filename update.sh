@@ -46,7 +46,6 @@ if [ ! -f ${ALM_HOME}/initialized ]; then
   popd
   touch ${ALM_HOME}/initialized
 fi
-mysql -e "GRANT ALL PRIVILEGES ON alminium.* TO 'alminium'@'%' IDENTIFIED BY 'alminium'" mysql 2>/dev/null
 echo "db service is ready."
 
 #
