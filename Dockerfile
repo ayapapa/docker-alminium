@@ -10,7 +10,7 @@ ENV ALM_HOME="/home/alm"  \
     ALM_ENABLE_SSL="N" \
     ALM_RELATIVE_URL_ROOT="" \
     ALM_DB_HOST=db \
-    ALM_DB_ROOT_PASS= \
+    ALM_DB_ROOT_PASS=alminium \
     ALM_ENABLE_JENKINS="N" \
     # auto backup in every 2 days at 3 A.M.
     ALM_ENABLE_AUTO_BACKUP="y" \
@@ -21,7 +21,7 @@ ENV ALM_HOME="/home/alm"  \
     ALM_BACKUP_DIR="/var/opt/alminium-backup" \
     ALM_BACKUP_LOG="/opt/alminium/log/backup.log" \
     ALM_DB_SETUP="N" \
-    ALM_VER="v3.4.8.4" \
+    ALM_VER="dev" \
     RM_VER="3.4.8" \
     DEBIAN_FRONTEND="noninteractive" \
     DEBCONF_NOWARNINGS="yes"
