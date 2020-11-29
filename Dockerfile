@@ -10,7 +10,7 @@ ENV ALM_HOME="/home/alm"  \
     ALM_ENABLE_SSL="N" \
     ALM_RELATIVE_URL_ROOT="" \
     ALM_DB_HOST=db \
-    ALM_DB_ROOT_PASS=alminium \
+    ALM_DB_ROOT_PASS="alminium" \
     ALM_ENABLE_JENKINS="N" \
     # auto backup in every 2 days at 3 A.M.
     ALM_ENABLE_AUTO_BACKUP="y" \
