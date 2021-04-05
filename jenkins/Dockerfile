@@ -15,6 +15,7 @@ RUN \
   echo "deb https://pkg.jenkins.io/debian binary/" \
     > /etc/apt/sources.list.d/jenkins.list && \
   apt-get update && \
+  apt-get dist-upgrade -y && \
   apt-get -y install jenkins
 
 #expose port
