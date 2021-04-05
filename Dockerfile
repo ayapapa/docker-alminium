@@ -33,11 +33,12 @@ COPY ./install.sh ${ALM_HOME}/install.sh
 RUN apt-get update && \
     apt-get install -y --no-install-recommends apt-utils && \
     apt-get dist-upgrade -y && \
-    apt-get install -y --no-install-recommends apache2 bc g++ git \
+    apt-get install -y --no-install-recommends apache2 bc cron g++ git \
       gnupg gnupg1 gnupg2 \
-      imagemagick libapache2-mod-passenger libapache2-mod-perl2 \
-      libapache2-mod-wsgi libapache2-mod-svn libdbd-mysql-perl \
-      libdbi-perl libmagickcore-dev libmagickwand-dev \
+      imagemagick libapache-dbi-perl libapache2-mod-perl2 \
+      libapache2-mod-wsgi libapache2-mod-svn libapr1-dev libaprutil1-dev \
+      libauthen-simple-ldap-perl libcurl4-openssl-dev libdbd-mysql-perl \
+      libdbi-perl libio-socket-ssl-perl libmagickcore-dev libmagickwand-dev \
       libmysqlclient-dev libsqlite3-dev libssl-dev make \
       mercurial mysql-client php-mysql ruby ruby-dev ssl-cert subversion \
       supervisor unzip wget && \
