@@ -2,6 +2,11 @@
 
 chown -R mysql:mysql /var/lib/mysql
 
+# if db directory's not initialized, init db dir.
+if [ ! -f /var/lib/mysql/initialized ]; then
+  /home/mysql/initialize.sh
+fi
+
 service mysql start
 
 # wait db available

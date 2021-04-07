@@ -2,6 +2,9 @@
 
 chown -R mysql:mysql /var/lib/mysql
 
+# mysql仕様変更のため以下を追加
+mysqld --initialize-insecure
+
 service mysql start
 
 # wait db available
@@ -27,4 +30,8 @@ mysql -e "GRANT PROCESS ON *.* TO 'root'@'%' IDENTIFIED BY 'alminium'"
 
 # add remote alminium user
 mysql -e "GRANT ALL PRIVILEGES ON alminium.* TO 'alminium'@'%' IDENTIFIED BY 'alminium'"
+
+#initialize flag
+echo touch initialize flag
+touch /var/lib/mysql/initialized
 

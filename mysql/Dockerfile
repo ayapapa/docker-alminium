@@ -25,8 +25,8 @@ RUN { \
     { \
       echo '[mysqld]'; \
       echo 'explicit_defaults_for_timestamp = true'; \
-    } >> /etc/mysql/my.cnf && \
-    /home/mysql/initialize.sh
+    } >> /etc/mysql/my.cnf #&& \
+#    /home/mysql/initialize.sh
 
 # working directory
 WORKDIR /home/mysql
