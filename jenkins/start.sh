@@ -31,7 +31,13 @@ if [ ! -d ${JENKINS_PLUGIN_DIR} ]; then
 fi
 
 echo セキュリティ解除後に、Jenkins起動
-sed -i.org "s/<useSecurity>true/<useSecurity>false/" ${JENKINS_HOME_DIR}/config.xml
+#sed -i.org "s/<useSecurity>true/<useSecurity>false/" ${JENKINS_HOME_DIR}/config.xml
+sed -i.org \
+    -e "s/<authorizationStrategy class=\"hudson.security.FullControlOnceLoggedInAuthorizationStrategy\">/<authorizationStrategy class=\"hudson.security.AuthorizationStrategy\$Unsecured\"\/>\n  <\!-- <authorizationStrategy class=\"hudson.security.FullControlOnceLoggedInAuthorizationStrategy\"> -->/" \
+    -e "s/<denyAnonymousReadAccess/<\!-- <denyAnonymousReadAccess/" \
+    -e "s/\/denyAnonymousReadAccess>/\/denyAnonymousReadAccess> -->/" \
+    -e "s/<\/authorizationStrategy>/<\!-- <\/authorizationStrategy> -->/" \
+    /var/lib/jenkins/config.xml
 service jenkins start
 
 # try connect to jenkins service up
