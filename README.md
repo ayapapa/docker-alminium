@@ -59,7 +59,7 @@ After that, set "Jenkins management" → "Global security setting" → "Enable s
 * DB name	: alminium
 * DB user	: alminium
 * DB passwoerd: alminium
-* Redmine version: 1.2.0以上
+* Redmine version: 1.2.0 or upper
 
 If you need Jenkins configuration file, you can find /home/jenkins on the host PC.
 
@@ -80,6 +80,39 @@ If you need Jenkins configuration file, you can find /home/jenkins on the host P
 
 ## To use behind a proxy 
 To use behind a proxy, please add environment variables, **http_proxy** and **https_proxy**, into docker-compose.yml.
+
+## backup and restore
+### How to backup
+```
+sudo docker exec -it dockeralminium_ALMinium_1 bash backup
+```
+
+### How to restore
+```
+sudo docker exec -it dockeralminium_ALMinium_1 bash restore # you can get backup list like following
+/var/opt/alminium-backup/2021-04-05-05-12-32-alm-backup.tar.gz
+...
+# if you restore /var/opt/alminium-backup/2021-04-05-05-12-32-alm-backup.tar.gz, execute next command.
+sudo docker exec -it dockeralminium_ALMinium_1 bash restore 2021-04-05-05-12-32-alm-backup.tar.gz
+
+```
+
+## How to upgrade Jenkins (an example)
+```
+sudo docker exec -it dockeralminium_jenkins_1 apt update
+sudo docker exec -it dockeralminium_jenkins_1 apt list --upgradable
+sudo docker exec -it dockeralminium_jenkins_1 apt dist-upgrade jenkins
+sudo docker exec -it dockeralminium_jenkins_1 service jenkins restart
+```
+
+## How to upgrade Mysql (an example)
+```
+sudo docker exec -it dockeralminium_db_1 apt update
+sudo docker exec -it dockeralminium_db_1 apt list --upgradable
+sudo docker exec -it dockeralminium_db_1 apt dist-upgrade mysql-server
+sudo docker exec -it dockeralminium_db_1 service mysql restart
+```
+
 
 # Environment Variables  
 You can configure by modifying Envitonment Variables in docker-compose.yml.  
