@@ -10,7 +10,7 @@ ENV ALM_HOME="/home/alm"  \
     ALM_ENABLE_SSL="N" \
     ALM_RELATIVE_URL_ROOT="" \
     ALM_DB_HOST=db \
-    ALM_DB_ROOT_PASS= \
+    ALM_DB_ROOT_PASS="alminium" \
     ALM_ENABLE_JENKINS="N" \
     # auto backup in every 2 days at 3 A.M.
     ALM_ENABLE_AUTO_BACKUP="y" \
@@ -21,7 +21,7 @@ ENV ALM_HOME="/home/alm"  \
     ALM_BACKUP_DIR="/var/opt/alminium-backup" \
     ALM_BACKUP_LOG="/opt/alminium/log/backup.log" \
     ALM_DB_SETUP="N" \
-    ALM_VER="v3.4.8.4" \
+    ALM_VER="v3.4.8.6" \
     RM_VER="3.4.8" \
     DEBIAN_FRONTEND="noninteractive" \
     DEBCONF_NOWARNINGS="yes"
@@ -33,11 +33,12 @@ COPY ./install.sh ${ALM_HOME}/install.sh
 RUN apt-get update && \
     apt-get install -y --no-install-recommends apt-utils && \
     apt-get dist-upgrade -y && \
-    apt-get install -y --no-install-recommends apache2 bc g++ git \
+    apt-get install -y --no-install-recommends apache2 bc cron g++ git \
       gnupg gnupg1 gnupg2 \
-      imagemagick libapache2-mod-passenger libapache2-mod-perl2 \
-      libapache2-mod-wsgi libapache2-mod-svn libdbd-mysql-perl \
-      libdbi-perl libmagickcore-dev libmagickwand-dev \
+      imagemagick libapache-dbi-perl libapache2-mod-perl2 \
+      libapache2-mod-wsgi libapache2-mod-svn libapr1-dev libaprutil1-dev \
+      libauthen-simple-ldap-perl libcurl4-openssl-dev libdbd-mysql-perl \
+      libdbi-perl libio-socket-ssl-perl libmagickcore-dev libmagickwand-dev \
       libmysqlclient-dev libsqlite3-dev libssl-dev make \
       mercurial mysql-client php-mysql ruby ruby-dev ssl-cert subversion \
       supervisor unzip wget && \

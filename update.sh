@@ -184,15 +184,20 @@ else
   ALM_ENABLE_SSL_OLD=N
 fi
 if [ "${ALM_ENABLE_SSL_OLD}" != "${ALM_ENABLE_SSL}" ]; then
-  cp -p /etc/opt/alminium/alminium.conf /etc/opt/alminium/alminium.conf.old
-  cp -p /etc/opt/alminium/redmine.conf /etc/opt/alminium/redmine.conf.old
+#  cp -p /etc/opt/alminium/alminium.conf /etc/opt/alminium/alminium.conf.old
+#  cp -p /etc/opt/alminium/redmine.conf /etc/opt/alminium/redmine.conf.old
   if [ "${ALM_ENABLE_SSL_OLD}" = "N" -a "${ALM_ENABLE_SSL}" = "y" ]; then
     sed -i.old "s|#SSL# *||" /etc/opt/alminium/alminium.conf
     sed -i.old "s|#SSL# *||" /etc/opt/alminium/redmine.conf
+    sed -i.old "s|#SSL# *||" /etc/opt/alminium/jenkins.conf
     a2enmod ssl
   elif [ "${ALM_ENABLE_SSL_OLD}" = "y" -a "${ALM_ENABLE_SSL}" = "N" ]; then
     sed -i.old "s|Include /etc/opt/alminium/redmine-ssl.conf|#SSL# Include /etc/opt/alminium/redmine-ssl.conf|" /etc/opt/alminium/alminium.conf 
     sed -i.old "s|Rewrite|#SSL# Rewrite|" /etc/opt/alminium/redmine.conf
+    sed -i.old \
+        -e "s|Header edit Location|#SSL# Header edit Location|" \
+        -e "s|RequestHeader set X_FORWARDED_PROTO|#SSL# RequestHeader set X_FORWARDED_PROTO|" \
+        /etc/opt/alminium/jenkins.conf
     a2dismod ssl
   fi
 fi

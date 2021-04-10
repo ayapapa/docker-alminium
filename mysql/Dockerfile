@@ -11,17 +11,21 @@ ENV MYSQL_ROOT_PASSWORD= \
     MYSQL_USER=alminium \
     MYSQL_PASSWORD=alminium
 
+# copy scripts
+COPY ./*.sh /home/mysql/
+
 # set default charset to utf8
 RUN { \
-    echo '[mysqld]'; \
-    echo 'character-set-server=utf8'; \
-    echo 'collation-server=utf8_general_ci'; \
-    echo '[client]'; \
-    echo 'default-character-set=utf8'; \
-} > /etc/mysql/conf.d/charset.cnf
-
-# copy start.sh
-COPY ./start.sh /home/mysql/start.sh
+      echo '[mysqld]'; \
+      echo 'character-set-server=utf8'; \
+      echo 'collation-server=utf8_general_ci'; \
+      echo '[client]'; \
+      echo 'default-character-set=utf8'; \
+    } > /etc/mysql/conf.d/charset.cnf && \
+    { \
+      echo '[mysqld]'; \
+      echo 'explicit_defaults_for_timestamp = true'; \
+    } >> /etc/mysql/my.cnf
 
 # working directory
 WORKDIR /home/mysql

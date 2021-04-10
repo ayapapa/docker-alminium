@@ -2,6 +2,11 @@
 
 chown -R mysql:mysql /var/lib/mysql
 
+# if db directory's not initialized, init db dir.
+if [ ! -f /var/lib/mysql/initialized ]; then
+  /home/mysql/initialize.sh
+fi
+
 service mysql start
 
 # wait db available
@@ -14,16 +19,6 @@ while [ "${OK}" != "0" ]; do
 done
 
 echo "success to connect to mysql db"
-
-# create alminium db
-DB_EXIST=$(mysql -e "SHOW DATABASES" mysql | grep alminium)
-if [ "${DB_EXIST}" = "" ]; then
-  mysql -e "CREATE DATABASE alminium DEFAULT CHARACTER SET utf8"
-fi
-
-# add remote alminium user
-mysql -e "GRANT ALL PRIVILEGES ON alminium.* TO 'alminium'@'%' IDENTIFIED BY 'alminium';"
-mysql -e "GRANT PROCESS ON *.* TO 'alminium'@'%' IDENTIFIED BY 'alminium';"
 
 # keep running this docker
 sleep infinity
