@@ -27,11 +27,8 @@ unlock_security() {
       /var/lib/jenkins/config.xml
 }
 
-# Jenkinsを再起動する。
-restart_jenkins() {
-  echo Jenkins再起動
-  service jenkins restart
-
+# Jenkinsの立ち上がりを待つ
+wait_for_jenkins_up() {
   # try connect to jenkins service up
   local RET=-1
   until  [ "$RET" -eq "0" ]
@@ -43,15 +40,24 @@ restart_jenkins() {
   done
   echo "Jenkinsが立ち上がりました！"
   # 念のため
-  sleep 10 
+  sleep 10
+}
+
+# Jenkinsを再起動する。
+restart_jenkins() {
+  echo Jenkins再起動
+  service jenkins restart
+  wait_for_jenkins_up
 }
 
 # Jenkins起動
 service jenkins start
+#wailするとエラーが起こり、その先に進めなくなるので、コメントアウト
+#wait_for_jenkins_up
 
 # 初期化済ならこのまま待機
 if [ -f /var/jenkins.flags/jenkins.initialized ]; then
-  echo 初期化済み
+  echo 初期化済みのため、このまま待機します
   sleep infinity
 fi
 
