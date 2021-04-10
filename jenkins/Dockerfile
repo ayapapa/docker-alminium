@@ -10,7 +10,8 @@ ENV JENKINS_HOME=/var/lib/jenkins
 # install packes and setup jenkins
 RUN \
   apt-get update && \
-  apt-get install -y git openjdk-8-jre-headless wget gnupg gnupg1 gnupg2 && \
+  apt-get install -y curl git openjdk-8-jre-headless \
+                     wget gnupg gnupg1 gnupg2 && \
   wget -q -O - https://pkg.jenkins.io/redhat/jenkins.io.key | apt-key add - && \
   echo "deb https://pkg.jenkins.io/debian binary/" \
     > /etc/apt/sources.list.d/jenkins.list && \

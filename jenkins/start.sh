@@ -15,7 +15,8 @@ unlock_security() {
     sleep 5
   done
   echo /var/lib/jenkins/config.xmlを発見したので、初期化を継続する
-
+  # 念のため待つ
+  sleep 10
   echo "セキュリティ解除(/var/lib/jenkins/config.xmlを編集)"
   #sed -i.org "s/<useSecurity>true/<useSecurity>false/" ${JENKINS_HOME_DIR}/config.xml
   sed -i.org \
